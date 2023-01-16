@@ -1,0 +1,62 @@
+{
+  "name": "paseto-ts",
+  "version": "1.0.0",
+  "description": "PASETO implementation in TypeScript",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "keywords": [
+    "paseto",
+    "v4",
+    "local",
+    "public",
+    "webcrypto",
+    "typescript"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "tsm node_modules/uvu/bin.js tests",
+    "test:coverage": "c8 --include=src npm test",
+    "test:report": "c8 report --reporter=text-lcov > coverage.lcov"
+  },
+  "author": "miunau <miunau+npm@miunau.com> (https://www.miunau.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "tsm": "^2.3.0",
+    "typescript": "^4.9.4",
+    "uvu": "^0.5.6",
+    "c8": "^7.12.0"
+  },
+  "dependencies": {
+    "@stablelib/blake2b": "^1.0.1",
+    "@stablelib/ed25519": "^1.0.3",
+    "@stablelib/xchacha20": "^1.0.1"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "lib": {
+      "types": "./dist/lib/index.d.ts",
+      "import": "./dist/lib/index.js"
+    },
+    "v4": {
+      "types": "./dist/v4/index.d.ts",
+      "import": "./dist/v4/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist"
+      ],
+      "lib": [
+        "./dist/lib"
+      ],
+      "v4": [
+        "./dist/v4"
+      ]
+    }
+  }
+}
