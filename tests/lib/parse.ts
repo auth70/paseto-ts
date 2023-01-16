@@ -354,5 +354,4 @@ test('parsePublicToken throws if payload is less than 32 bytes', () => {
     });
 });
 
-
 test.run();

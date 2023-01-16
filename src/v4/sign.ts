@@ -1,6 +1,6 @@
 import type { Footer, Payload } from "../lib/types";
 import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES, TOKEN_MAGIC_STRINGS } from "../lib/magic";
-import { concat, payloadToUint8Array, stringToUint8Array } from "../lib/uint8array";
+import { concat, payloadToUint8Array } from "../lib/uint8array";
 import { parseAssertion, parseFooter, parseKeyData, parsePayload } from "../lib/parse";
 
 import { PAE } from "../lib/pae";

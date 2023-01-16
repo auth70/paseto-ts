@@ -51,4 +51,8 @@ test('returnPossibleJson returns an empty string if the input is undefined', () 
     assert.is(result, '');
 });
 
+test('assertJsonStringSize skips if maxDepth and maxKeys is 0', () => {
+    assertJsonStringSize(json, { maxDepth: 0, maxKeys: 0 });
+});
+
 test.run();

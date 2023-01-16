@@ -1,15 +1,18 @@
 {
   "name": "paseto-ts",
   "version": "1.0.0",
-  "description": "PASETO implementation in TypeScript",
+  "description": "PASETO v4 (encrypt, decrypt, sign & verify) in TypeScript",
   "type": "module",
   "types": "./dist/index.d.ts",
   "keywords": [
+    "decrypt",
+    "encrypt",
+    "sign",
+    "verify",
     "paseto",
     "v4",
     "local",
     "public",
-    "webcrypto",
     "typescript"
   ],
   "scripts": {
@@ -19,6 +22,8 @@
     "test:coverage": "c8 --include=src npm test",
     "test:report": "c8 report --reporter=text-lcov > coverage.lcov"
   },
+  "homepage": "https://github.com/miunau/paseto-ts",
+  "repository": "miunau/paseto-ts",
   "author": "miunau <miunau+npm@miunau.com> (https://www.miunau.com)",
   "license": "MIT",
   "devDependencies": {
@@ -27,6 +32,11 @@
     "uvu": "^0.5.6",
     "c8": "^7.12.0"
   },
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "README.md"
+  ],
   "dependencies": {
     "@stablelib/blake2b": "^1.0.1",
     "@stablelib/ed25519": "^1.0.3",
@@ -44,6 +54,26 @@
     "v4": {
       "types": "./dist/v4/index.d.ts",
       "import": "./dist/v4/index.js"
+    },
+    "v4/decrypt": {
+      "types": "./dist/v4/decrypt.d.ts",
+      "import": "./dist/v4/decrypt.js"
+    },
+    "v4/encrypt": {
+      "types": "./dist/v4/encrypt.d.ts",
+      "import": "./dist/v4/encrypt.js"
+    },
+    "v4/key": {
+      "types": "./dist/v4/key.d.ts",
+      "import": "./dist/v4/key.js"
+    },
+    "v4/sign": {
+      "types": "./dist/v4/sign.d.ts",
+      "import": "./dist/v4/sign.js"
+    },
+    "v4/verify": {
+      "types": "./dist/v4/verify.d.ts",
+      "import": "./dist/v4/verify.js"
     }
   },
   "typesVersions": {
@@ -55,6 +85,21 @@
         "./dist/lib"
       ],
       "v4": [
+        "./dist/v4"
+      ],
+      "v4/decrypt": [
+        "./dist/v4"
+      ],
+      "v4/encrypt": [
+        "./dist/v4"
+      ],
+      "v4/key": [
+        "./dist/v4"
+      ],
+      "v4/sign": [
+        "./dist/v4"
+      ],
+      "v4/verify": [
         "./dist/v4"
       ]
     }

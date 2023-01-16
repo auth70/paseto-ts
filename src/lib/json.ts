@@ -71,13 +71,17 @@ export function assertJsonStringSize(json: string, { maxDepth = 10, maxKeys = 10
     if (typeof json !== 'string') {
         throw new PasetoPayloadInvalid(`JSON string must be a string (got ${typeof json}))`);
     }
-    const depth = getJsonDepth(json);
-    const keys = countKeys(json);
-    if (depth > maxDepth) {
-        throw new PasetoPayloadInvalid(`JSON string exceeds maximum depth of ${maxDepth}`);
-    }
-    if (keys > maxKeys) {
-        throw new PasetoPayloadInvalid(`JSON string exceeds maximum number of keys of ${maxKeys}`);
+    if(maxDepth || maxKeys) {
+
+        const depth = getJsonDepth(json);
+        const keys = countKeys(json);
+        if (maxDepth && maxDepth > 0 && depth > maxDepth) {
+            throw new PasetoPayloadInvalid(`JSON string exceeds maximum depth of ${maxDepth}`);
+        }
+        if (maxKeys && maxKeys > 0 && keys > maxKeys) {
+            throw new PasetoPayloadInvalid(`JSON string exceeds maximum number of keys of ${maxKeys}`);
+        }
+
     }
     return true;
 }

@@ -1,11 +1,10 @@
-import { AUTH_BYTES, KEY_BYTES, MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES } from "../lib/magic";
 import { Footer, Payload } from "../lib/types";
+import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES } from "../lib/magic";
 import { constantTimeEqual, validateToken } from "../lib/validate";
 import { deriveEncryptionAndAuthKeys, parseAssertion, parseFooter, parseKeyData, parseLocalToken, parsePayload } from "../lib/parse";
 
 import { PAE } from "../lib/pae";
 import { PasetoDecryptionFailed } from '../lib/errors';
-import { concat } from "../lib/uint8array";
 import { hash } from "@stablelib/blake2b";
 import { returnPossibleJson } from "../lib/json";
 import { streamXOR } from "@stablelib/xchacha20";

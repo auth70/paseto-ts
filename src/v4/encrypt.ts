@@ -1,5 +1,5 @@
-import { AUTH_BYTES, KEY_BYTES, MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES, TOKEN_MAGIC_STRINGS } from "../lib/magic";
-import { concat, payloadToUint8Array, stringToUint8Array } from "../lib/uint8array";
+import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES, TOKEN_MAGIC_STRINGS } from "../lib/magic";
+import { concat, payloadToUint8Array } from "../lib/uint8array";
 import { deriveEncryptionAndAuthKeys, parseAssertion, parseFooter, parsePayload } from "../lib/parse";
 
 import { Footer } from "../lib/types";
