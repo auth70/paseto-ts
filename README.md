@@ -37,7 +37,7 @@ You can provide an `exp` and `nbf` *(not before)* claim as a relative time, e.g.
 
 ### JSON validation
 
-This library conforms to the best practices laid out in the PASETO implementation guide regarding JSON parsing. It will throw an error if the payload or footer is not valid JSON, if the JSON is too deep or has too many keys. You can disable this behaviour by passing `maxDepth: 0` and/or `maxKeys: 0` to the `encrypt` function's options object.
+This library conforms to the best practices laid out in the PASETO implementation guide regarding JSON parsing. It will throw an error if the payload or footer is not valid JSON, if the JSON is too deep or has too many keys. You can disable this behaviour by passing `maxDepth: 0` and/or `maxKeys: 0` to the options object.
 
 ### Local (encryption and decryption)
 
@@ -111,9 +111,9 @@ try {
             // Optional: If true, a default `iat` claim of the current time will be added to the payload.
             addIat, // boolean; defaults to true
             // Optional: Maximum depth of the JSON in the payload and footer objects (if footer parses to an object)
-            maxDepth, // number; defaults to 32
+            maxDepth, // number; defaults to 32. 0 to disable
             // Optional: Maximum number of keys in the payload and footer objects (if footer parses to an object)
-            maxKeys, // number; defaults to 128
+            maxKeys, // number; defaults to 128. 0 to disable
         }
     );
 
@@ -146,9 +146,9 @@ try {
             // Optional: Assertion is any string or buffer.
             assertion, // string | Uint8Array
             // Optional: Maximum depth of the JSON in the payload and footer objects (if footer parses to an object)
-            maxDepth, // number; defaults to 32
+            maxDepth, // number; defaults to 32. 0 to disable
             // Optional: Maximum number of keys in the payload and footer objects (if footer parses to an object)
-            maxKeys, // number; defaults to 128
+            maxKeys, // number; defaults to 128. 0 to disable
         }
     );
 
@@ -241,9 +241,9 @@ try {
             // Optional: If true, a default `iat` claim of the current time will be added to the payload.
             addIat, // boolean; defaults to true
             // Optional: Maximum depth of the JSON in the payload and footer objects (if footer parses to an object)
-            maxDepth, // number; defaults to 32
+            maxDepth, // number; defaults to 32. 0 to disable
             // Optional: Maximum number of keys in the payload and footer objects (if footer parses to an object)
-            maxKeys, // number; defaults to 128
+            maxKeys, // number; defaults to 128. 0 to disable
         }
     );
 
@@ -274,9 +274,9 @@ try {
             // Optional: Assertion is any string or buffer.
             assertion, // string | Uint8Array
             // Optional: Maximum depth of the JSON in the payload and footer objects (if footer parses to an object)
-            maxDepth, // number; defaults to 32
+            maxDepth, // number; defaults to 32. 0 to disable
             // Optional: Maximum number of keys in the payload and footer objects (if footer parses to an object)
-            maxKeys, // number; defaults to 128
+            maxKeys, // number; defaults to 128. 0 to disable
         }
     );
 } catch(err) {
