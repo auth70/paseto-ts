@@ -124,7 +124,7 @@ try {
 }
 ```
 
-#### Decrypt a payload
+#### Decrypt a token
 
 ```ts
 import { decrypt } from 'paseto-ts/v4/decrypt';
@@ -254,7 +254,7 @@ try {
 }
 ```
 
-#### Verify a payload
+#### Verify a token
 
 ```ts
 import { verify } from 'paseto-ts/v4/verify';
@@ -265,6 +265,7 @@ import { verify } from 'paseto-ts/v4/verify';
 // const { verify } = v4;
 
 try {
+
     const { payload, footer } = await verify(
         // publicKey = k4.public.xxx..
         publicKey, // string | Uint8Array
@@ -279,12 +280,13 @@ try {
             maxKeys, // number; defaults to 128. 0 to disable
         }
     );
+
+    // payload: { sub: '1234567890', name: 'John Doe', iat: "2023-01-01T00:00:00.000Z" }
+    // footer: { kid: 'xxx..', wpk: 'xxx..' }
+
 } catch(err) {
     // err: Error
 }
-
-// payload: { sub: '1234567890', name: 'John Doe', iat: "2023-01-01T00:00:00.000Z" }
-// footer: { kid: 'xxx..', wpk: 'xxx..' }
 ```
 
 ## Contributing
@@ -294,5 +296,3 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## License
 
 MIT
-
-&copy; 2023 [miunau](https://miunau.com)
