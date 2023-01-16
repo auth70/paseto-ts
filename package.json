@@ -16,15 +16,21 @@
     "typescript"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "watch": "tsc -w",
     "test": "tsm node_modules/uvu/bin.js tests",
     "test:coverage": "c8 --include=src npm test",
     "test:report": "c8 report --reporter=text-lcov > coverage.lcov"
   },
-  "homepage": "https://github.com/miunau/paseto-ts",
-  "repository": "miunau/paseto-ts",
-  "author": "miunau <miunau+npm@miunau.com> (https://www.miunau.com)",
+  "homepage": "https://github.com/auth70/paseto-ts",
+  "repository": "github:auth70/paseto-ts",
+  "contributors": [
+    {
+      "name": "miunau",
+      "email": "miunau+npm@miunau.com",
+      "url": "https://miunau.com"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "tsm": "^2.3.0",
