@@ -1,9 +1,8 @@
 {
   "name": "paseto-ts",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "PASETO v4 (encrypt, decrypt, sign & verify) in TypeScript",
   "type": "module",
-  "types": "./dist/index.d.ts",
   "keywords": [
     "decrypt",
     "encrypt",
@@ -49,63 +48,14 @@
     "@stablelib/xchacha20": "^1.0.1"
   },
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "lib": {
-      "types": "./dist/lib/index.d.ts",
-      "import": "./dist/lib/index.js"
-    },
-    "v4": {
+    "./v4": {
       "types": "./dist/v4/index.d.ts",
       "import": "./dist/v4/index.js"
-    },
-    "v4/decrypt": {
-      "types": "./dist/v4/decrypt.d.ts",
-      "import": "./dist/v4/decrypt.js"
-    },
-    "v4/encrypt": {
-      "types": "./dist/v4/encrypt.d.ts",
-      "import": "./dist/v4/encrypt.js"
-    },
-    "v4/key": {
-      "types": "./dist/v4/key.d.ts",
-      "import": "./dist/v4/key.js"
-    },
-    "v4/sign": {
-      "types": "./dist/v4/sign.d.ts",
-      "import": "./dist/v4/sign.js"
-    },
-    "v4/verify": {
-      "types": "./dist/v4/verify.d.ts",
-      "import": "./dist/v4/verify.js"
     }
   },
   "typesVersions": {
     "*": {
-      ".": [
-        "./dist"
-      ],
-      "lib": [
-        "./dist/lib"
-      ],
       "v4": [
-        "./dist/v4"
-      ],
-      "v4/decrypt": [
-        "./dist/v4"
-      ],
-      "v4/encrypt": [
-        "./dist/v4"
-      ],
-      "v4/key": [
-        "./dist/v4"
-      ],
-      "v4/sign": [
-        "./dist/v4"
-      ],
-      "v4/verify": [
         "./dist/v4"
       ]
     }

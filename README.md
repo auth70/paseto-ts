@@ -59,12 +59,7 @@ There is no functional difference between the two formats; if you are passing th
 You can generate a local key in PASERK format using the `generateKeys` function:
 
 ```ts
-import { generateKeys } from 'paseto-ts/v4/key';
-// or:
-// import { generateKeys } from 'paseto-ts/v4';
-// or:
-// import { v4 } from 'paseto-ts';
-// const { generateKeys } = v4;
+import { generateKeys } from 'paseto-ts/v4';
 
 const localKey = generateKeys('local');
 // localKey: k4.local.xxx..
@@ -73,12 +68,7 @@ const localKey = generateKeys('local');
 If you need the key as a buffer, you can pass in `buffer` as the second argument:
 
 ```ts
-import { generateKeys } from 'paseto-ts/v4/key';
-// or:
-// import { generateKeys } from 'paseto-ts/v4';
-// or:
-// import { v4 } from 'paseto-ts';
-// const { generateKeys } = v4;
+import { generateKeys } from 'paseto-ts/v4';
 
 const localKeyBuffer = generateKeys('local', 'buffer');
 // localKeyBuffer: Uint8Array(41)
@@ -87,12 +77,7 @@ const localKeyBuffer = generateKeys('local', 'buffer');
 ### Encrypt a payload
 
 ```ts
-import { encrypt } from 'paseto-ts/v4/encrypt';
-// or:
-// import { encrypt } from 'paseto-ts/v4';
-// or:
-// import { v4 } from 'paseto-ts';
-// const { encrypt } = v4;
+import { encrypt } from 'paseto-ts/v4';
 
 try {
 
@@ -127,12 +112,7 @@ try {
 ### Decrypt a token
 
 ```ts
-import { decrypt } from 'paseto-ts/v4/decrypt';
-// or:
-// import { decrypt } from 'paseto-ts/v4';
-// or:
-// import { v4 } from 'paseto-ts';
-// const { decrypt } = v4;
+import { decrypt } from 'paseto-ts/v4';
 
 try {
 
@@ -185,12 +165,7 @@ Type         | Expected format                                                  
 You can generate a public/secret key pair in PASERK format using the `generateKeys` function:
 
 ```ts
-import { generateKeys } from 'paseto-ts/v4/key';
-// or:
-// import { generateKeys } from 'paseto-ts/v4';
-// or:
-// import { v4 } from 'paseto-ts';
-// const { generateKeys } = v4;
+import { generateKeys } from 'paseto-ts/v4';
 
 const { secretKey, publicKey } = generateKeys('public');
 // secretKey: k4.secret.xxx..
@@ -200,12 +175,7 @@ const { secretKey, publicKey } = generateKeys('public');
 If you need the keys as buffers, you can pass in `buffer` as the second argument:
 
 ```ts
-import { generateKeys } from 'paseto-ts/v4/key';
-// or:
-// import { generateKeys } from 'paseto-ts/v4';
-// or:
-// import { v4 } from 'paseto-ts';
-// const { generateKeys } = v4;
+import { generateKeys } from 'paseto-ts/v4';
 
 const { secretKey, publicKey } = generateKeys('public', 'buffer');
 // secretKey: Uint8Array(41)
@@ -217,12 +187,7 @@ const { secretKey, publicKey } = generateKeys('public', 'buffer');
 You can pass a `Payload` object, a `string` or an `Uint8Array` to the `sign` function PASETO defines a set of [registered claims](https://github.com/paseto-standard/paseto-spec/blob/master/docs/02-Implementation-Guide/04-Claims.md#registered-claims) that you can use in your payload. Any registered claims are validated.
 
 ```ts
-import { sign } from 'paseto-ts/v4/sign';
-// or:
-// import { sign } from 'paseto-ts/v4';
-// or:
-// import { v4 } from 'paseto-ts';
-// const { sign } = v4;
+import { sign } from 'paseto-ts/v4';
 
 try {
 
@@ -257,12 +222,7 @@ try {
 ### Verify a token
 
 ```ts
-import { verify } from 'paseto-ts/v4/verify';
-// or:
-// import { verify } from 'paseto-ts/v4';
-// or:
-// import { v4 } from 'paseto-ts';
-// const { verify } = v4;
+import { verify } from 'paseto-ts/v4';
 
 try {
 
