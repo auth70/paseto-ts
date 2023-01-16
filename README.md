@@ -39,13 +39,13 @@ You can provide an `exp` and `nbf` *(not before)* claim as a relative time, e.g.
 
 This library conforms to the best practices laid out in the PASETO implementation guide regarding JSON parsing. It will throw an error if the payload or footer is not valid JSON, if the JSON is too deep or has too many keys. You can disable this behaviour by passing `maxDepth: 0` and/or `maxKeys: 0` to the options object.
 
-### Local (encryption and decryption)
+## Local (encryption and decryption)
 
 **You use the same key to encrypt and decrypt your message.**
 
 The PASETO spec requires local and public keys to be separated. Therefore, to use the `encrypt` and `decrypt` functions in this library, `k4.local.` **must** be prepended to the key data to prevent accidental key sharing between local and public functions. Please refer to the table below:
 
-#### Local key format
+### Local key format
 
 Type         | Expected format                                                  | Length
 -------------|------------------------------------------------------------------|------------------
@@ -84,7 +84,7 @@ const localKeyBuffer = generateKeys('local', 'buffer');
 // localKeyBuffer: Uint8Array(41)
 ```
 
-#### Encrypt a payload
+### Encrypt a payload
 
 ```ts
 import { encrypt } from 'paseto-ts/v4/encrypt';
@@ -124,7 +124,7 @@ try {
 }
 ```
 
-#### Decrypt a token
+### Decrypt a token
 
 ```ts
 import { decrypt } from 'paseto-ts/v4/decrypt';
@@ -160,13 +160,13 @@ try {
 }
 ```
 
-### Public (signing and verification)
+## Public (signing and verification)
 
 **You use a secret key to sign your payload, and a public key to verify the generated token.**
 
 The PASETO spec dictates that you use Ed25519 keys, which are 64 bytes long. To use the `sign` and `verify` functions in this library, `k4.public.` **must** be prepended to the public key data and `k4.secret.` **must** be prepended to the secret key data to prevent accidental key sharing between local and public functions. Please refer to the table below:
 
-#### Secret key format
+### Secret key format
 
 Type | Expected format | Length
 -------------|------------------------------------------------------------------|-----------------
@@ -212,7 +212,7 @@ const { secretKey, publicKey } = generateKeys('public', 'buffer');
 // publicKey: Uint8Array(41)
 ```
 
-#### Sign a payload
+### Sign a payload
 
 You can pass a `Payload` object, a `string` or an `Uint8Array` to the `sign` function PASETO defines a set of [registered claims](https://github.com/paseto-standard/paseto-spec/blob/master/docs/02-Implementation-Guide/04-Claims.md#registered-claims) that you can use in your payload. Any registered claims are validated.
 
@@ -254,7 +254,7 @@ try {
 }
 ```
 
-#### Verify a token
+### Verify a token
 
 ```ts
 import { verify } from 'paseto-ts/v4/verify';
