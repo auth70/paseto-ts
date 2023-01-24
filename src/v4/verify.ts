@@ -28,15 +28,18 @@ export function verify(
         assertion = new Uint8Array(0),
         maxDepth = MAX_DEPTH_DEFAULT,
         maxKeys = MAX_KEYS_DEFAULT,
+        validatePayload = true,
     }:
     {
         assertion?: string | Uint8Array;
         maxDepth?: number;
         maxKeys?: number;
+        validatePayload?: boolean;
     } = {
         assertion: new Uint8Array(0),
         maxDepth: MAX_DEPTH_DEFAULT,
         maxKeys: MAX_KEYS_DEFAULT,
+        validatePayload: true,
     }
 ): {
     payload: Payload;
@@ -57,6 +60,7 @@ export function verify(
         parseFooter(footer, {
             maxDepth,
             maxKeys,
+            validate: !!validatePayload,
         });
     }
 
@@ -86,6 +90,7 @@ export function verify(
             addIat: false,
             maxDepth,
             maxKeys,
+            validate: !!validatePayload,
         }),
         footer: returnPossibleJson(footer)
     };

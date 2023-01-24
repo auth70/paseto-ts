@@ -29,14 +29,17 @@ export function decrypt(
         assertion = new Uint8Array(0),
         maxDepth = MAX_DEPTH_DEFAULT,
         maxKeys = MAX_KEYS_DEFAULT,
+        validatePayload = true,
     }: {
         assertion?: string | Uint8Array;
         maxDepth?: number;
         maxKeys?: number;
+        validatePayload?: boolean;
     } = {
         assertion: new Uint8Array(0),
         maxDepth: MAX_DEPTH_DEFAULT,
         maxKeys: MAX_KEYS_DEFAULT,
+        validatePayload: true,
     }
 ): {
     payload: Payload,
@@ -56,6 +59,7 @@ export function decrypt(
     parseFooter(footer, {
         maxDepth,
         maxKeys,
+        validate: !!validatePayload,
     });
 
     assertion = parseAssertion(assertion);
@@ -86,7 +90,8 @@ export function decrypt(
     return {
         payload: parsePayload(plaintext, {
             addExp: false,
-            addIat: false
+            addIat: false,
+            validate: !!validatePayload,
         }),
         footer: returnPossibleJson(footer)
     };

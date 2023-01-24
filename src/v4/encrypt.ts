@@ -32,6 +32,7 @@ export function encrypt(
         addExp = true,
         maxDepth = MAX_DEPTH_DEFAULT,
         maxKeys = MAX_KEYS_DEFAULT,
+        validatePayload = true,
     }:
     {
         footer?: Footer | string | Uint8Array;
@@ -40,6 +41,7 @@ export function encrypt(
         addExp?: boolean;
         maxDepth?: number;
         maxKeys?: number;
+        validatePayload?: boolean;
     } = {
         footer: new Uint8Array(0),
         assertion: new Uint8Array(0),
@@ -47,6 +49,7 @@ export function encrypt(
         addExp: true,
         maxDepth: MAX_DEPTH_DEFAULT,
         maxKeys: MAX_KEYS_DEFAULT,
+        validatePayload: true,
     }
 ): string {
     
@@ -58,11 +61,13 @@ export function encrypt(
         addIat: !!addIat,
         maxDepth,
         maxKeys,
+        validate: !!validatePayload,
     }));
 
     const footerUint8 = parseFooter(footer, {
         maxDepth,
         maxKeys,
+        validate: !!validatePayload,
     });
 
     // Assert assertion is a string or Uint8Array

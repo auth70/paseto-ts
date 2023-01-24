@@ -35,6 +35,8 @@ You can disable this behaviour by passing `addIat: false` and/or `addExp: false`
 
 You can provide an `exp` and `nbf` *(not before)* claim as a relative time, e.g. `exp: "1 hour"` or `nbf: "1 day"`. The `iat` claim only accepts string-formatted ISO dates (e.g. `iat: "2023-01-01T00:00:00Z"`).
 
+Registered claims will be validated against the spec. To disable this behaviour, pass `validatePayload: false` as an option.
+
 ### JSON validation
 
 This library conforms to the best practices laid out in the PASETO implementation guide regarding JSON parsing. It will throw an error if the payload or footer is not valid JSON, if the JSON is too deep or has too many keys. You can disable this behaviour by passing `maxDepth: 0` and/or `maxKeys: 0` to the options object.
@@ -99,6 +101,8 @@ try {
             maxDepth, // number; defaults to 32. 0 to disable
             // Optional: Maximum number of keys in the payload and footer objects (if footer parses to an object)
             maxKeys, // number; defaults to 128. 0 to disable
+            // Optional: If true, the payload will be validated against the registered claims.
+            validatePayload, // boolean; defaults to true
         }
     );
 
@@ -129,6 +133,8 @@ try {
             maxDepth, // number; defaults to 32. 0 to disable
             // Optional: Maximum number of keys in the payload and footer objects (if footer parses to an object)
             maxKeys, // number; defaults to 128. 0 to disable
+            // Optional: If true, the payload will be validated against the registered claims.
+            validatePayload, // boolean; defaults to true
         }
     );
 
@@ -209,6 +215,8 @@ try {
             maxDepth, // number; defaults to 32. 0 to disable
             // Optional: Maximum number of keys in the payload and footer objects (if footer parses to an object)
             maxKeys, // number; defaults to 128. 0 to disable
+            // Optional: If true, the payload will be validated against the registered claims.
+            validatePayload, // boolean; defaults to true
         }
     );
 
@@ -238,6 +246,8 @@ try {
             maxDepth, // number; defaults to 32. 0 to disable
             // Optional: Maximum number of keys in the payload and footer objects (if footer parses to an object)
             maxKeys, // number; defaults to 128. 0 to disable
+            // Optional: If true, the payload will be validated against the registered claims.
+            validatePayload, // boolean; defaults to true
         }
     );
 

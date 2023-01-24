@@ -34,6 +34,7 @@ export function sign(
         addIat = true, // Add an iat claim if one is not provided
         maxDepth = MAX_DEPTH_DEFAULT, // Maximum depth of nested objects
         maxKeys = MAX_KEYS_DEFAULT, // Maximum number of keys in an object
+        validatePayload = true, // Validate the payload
     }: {
         footer?: Footer | string | Uint8Array;
         assertion?: string | Uint8Array,
@@ -41,6 +42,7 @@ export function sign(
         addIat?: boolean;
         maxDepth?: number;
         maxKeys?: number;
+        validatePayload?: boolean;
     } = {
         footer: new Uint8Array(0),
         assertion: new Uint8Array(0),
@@ -48,6 +50,7 @@ export function sign(
         addIat: true,
         maxDepth: MAX_DEPTH_DEFAULT,
         maxKeys: MAX_KEYS_DEFAULT,
+        validatePayload: true,
     },
 ): string {
 
@@ -59,11 +62,13 @@ export function sign(
         addIat: !!addIat,
         maxDepth,
         maxKeys,
+        validate: !!validatePayload,
     }));
 
     const footerUint8 = parseFooter(footer, {
         maxDepth,
         maxKeys,
+        validate: !!validatePayload,
     });
 
     // Assert assertion is a string or Uint8Array

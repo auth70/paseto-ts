@@ -153,16 +153,19 @@ export function parsePayload(payload: string | Payload | Uint8Array, {
     addExp = true, // Add an exp claim if one is not provided:
     maxDepth = 32, // Maximum depth of the JSON object
     maxKeys = 128, // Maximum number of keys in the JSON object
+    validate = true, // Validate the payload
 }: {
     addIat?: boolean;
     addExp?: boolean;
     maxDepth?: number;
     maxKeys?: number;
+    validate?: boolean;
 } = {
     addIat: true,
     addExp: true,
     maxDepth: 32,
     maxKeys: 128,
+    validate: true,
 }): Payload {
 
     let obj;
@@ -202,7 +205,7 @@ export function parsePayload(payload: string | Payload | Uint8Array, {
     }
 
     // Validate the "iss" claim
-    if (obj.hasOwnProperty("iss")) {
+    if (obj.hasOwnProperty("iss") && validate) {
         const iss = (obj as any).iss;
         if (typeof iss !== "string") {
             throw new PasetoClaimInvalid("Payload must have a valid \"iss\" claim (is not a string)");
@@ -210,7 +213,7 @@ export function parsePayload(payload: string | Payload | Uint8Array, {
     }
 
     // Validate the "sub" claim
-    if (obj.hasOwnProperty("sub")) {
+    if (obj.hasOwnProperty("sub") && validate) {
         const sub = (obj as any).sub;
         if (typeof sub !== "string") {
             throw new PasetoClaimInvalid("Payload must have a valid \"sub\" claim (is not a string)");
@@ -218,7 +221,7 @@ export function parsePayload(payload: string | Payload | Uint8Array, {
     }
 
     // Validate the "aud" claim
-    if (obj.hasOwnProperty("aud")) {
+    if (obj.hasOwnProperty("aud") && validate) {
         const aud = (obj as any).aud;
         if (typeof aud !== "string") {
             throw new PasetoClaimInvalid("Payload must have a valid \"aud\" claim (is not a string)");
@@ -235,7 +238,7 @@ export function parsePayload(payload: string | Payload | Uint8Array, {
     const now = Date.now();
 
     // Validate the "iat" claim
-    if (obj.hasOwnProperty("iat")) {
+    if (obj.hasOwnProperty("iat") && validate) {
         // Validate the existing "iat" claim.
         // Don't allow passing in a relative time string (e.g. "1 hour")
         const iat = (obj as any).iat;
@@ -253,7 +256,7 @@ export function parsePayload(payload: string | Payload | Uint8Array, {
     }
 
     // Validate the "exp" claim
-    if (obj.hasOwnProperty("exp")) {
+    if (obj.hasOwnProperty("exp") && validate) {
         let exp = (obj as any).exp;
         try {
             exp = parseTime(exp);
@@ -278,7 +281,7 @@ export function parsePayload(payload: string | Payload | Uint8Array, {
     }
 
     // Validate the "nbf" claim
-    if (obj.hasOwnProperty("nbf")) {
+    if (obj.hasOwnProperty("nbf") && validate) {
         let nbf = (obj as any).nbf;
         try {
             nbf = parseTime(nbf);
@@ -300,7 +303,7 @@ export function parsePayload(payload: string | Payload | Uint8Array, {
     }
 
     // Validate the "jti" claim
-    if (obj.hasOwnProperty("jti")) {
+    if (obj.hasOwnProperty("jti") && validate) {
         const jti = (obj as any).jti;
         if (typeof jti !== "string") {
             throw new PasetoClaimInvalid("Payload must have a valid \"jti\" claim (is not a string)");
@@ -319,7 +322,7 @@ export function parsePayload(payload: string | Payload | Uint8Array, {
  * @returns {Uint8Array} footer as a Uint8Array.
  * @see https://github.com/paseto-standard/paseto-spec/blob/master/docs/02-Implementation-Guide/04-Claims.md#optional-footer-claims
  */
-export function parseFooter(footer: Footer | string | Uint8Array, { maxDepth = 32, maxKeys = 128, }: { maxDepth?: number; maxKeys?: number; } = { maxDepth: 32, maxKeys: 128 }): Uint8Array {
+export function parseFooter(footer: Footer | string | Uint8Array, { maxDepth = 32, maxKeys = 128, validate = true }: { maxDepth?: number; maxKeys?: number; validate?: boolean; } = { maxDepth: 32, maxKeys: 128, validate: true }): Uint8Array {
     if (typeof footer === "string") {
         // Check if the footer is JSON
         if (footer.startsWith("{") && footer.endsWith("}")) {
@@ -328,15 +331,19 @@ export function parseFooter(footer: Footer | string | Uint8Array, { maxDepth = 3
                 maxKeys,
             });
             const obj = JSON.parse(footer);
-            validateFooterClaims(obj);
+            if(validate) validateFooterClaims(obj);
         }
         return stringToUint8Array(footer);
     } else if (isObject(footer)) {
-        validateFooterClaims(footer);
+        if(validate) validateFooterClaims(footer);
         return stringToUint8Array(JSON.stringify(footer));
     } else if (footer instanceof Uint8Array) {
         const possibleObj = uint8ArrayToString(footer);
-        if(possibleObj.startsWith("{") && possibleObj.endsWith("}")) {
+        if(possibleObj.startsWith("{") && possibleObj.endsWith("}") && validate) {
+            assertJsonStringSize(possibleObj, {
+                maxDepth,
+                maxKeys,
+            });
             const obj = JSON.parse(possibleObj);
             validateFooterClaims(obj);
         }
