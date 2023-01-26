@@ -10,7 +10,7 @@ If you are unfamiliar with PASETO, please see Okta's blog post ["A Thorough Intr
 npm install --save paseto-ts
 ```
 
-The only dependencies are the Blake2b, Ed25519 and XChaCha20 cryptographic primitives, which do not yet exist in the standard Web Crypto API, provided by [stablelib](https:/www.stablelib.com). If you wish to use other primitives, feel free to fork the project and implement them; it should be straightforward.
+The only dependencies are the Blake2b, Ed25519 and XChaCha20 cryptographic primitives, which do not yet exist in the standard Web Crypto API, provided by [stablelib](https://www.stablelib.com). If you wish to use other primitives, feel free to fork the project and implement them; it should be straightforward.
 
 ## Supported PASETO versions
 
