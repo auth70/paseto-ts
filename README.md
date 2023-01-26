@@ -159,7 +159,7 @@ Type | Expected format | Length
 `PASERK`     | `k4.secret.[key data as base64url]`                              | 52 characters
 `Uint8Array` | `[0x6b, 0x34, 0x2e, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, ...key]` | 41 bytes
 
-#### Public key format
+### Public key format
 
 Type         | Expected format                                                  | Length
 -------------|------------------------------------------------------------------|---------------
