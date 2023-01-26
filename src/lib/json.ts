@@ -1,4 +1,4 @@
-import { PasetoPayloadInvalid } from "./errors";
+import { PasetoPayloadInvalid } from "./errors.js";
 
 const decoder = new TextDecoder();
 

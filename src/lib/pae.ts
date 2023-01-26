@@ -1,4 +1,4 @@
-import { concat } from "./uint8array";
+import { concat } from "./uint8array.js";
 
 /**
  * Encode a number as a 64-bit little-endian unsigned integer

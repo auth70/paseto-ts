@@ -1,7 +1,7 @@
-import { PasetoFormatInvalid, PasetoPurposeInvalid } from '../lib/errors';
-import { concat, stringToUint8Array } from '../lib/uint8array';
+import { PasetoFormatInvalid, PasetoPurposeInvalid } from '../lib/errors.js';
+import { concat, stringToUint8Array } from '../lib/uint8array.js';
 
-import { base64UrlEncode } from '../lib/base64url';
+import { base64UrlEncode } from '../lib/base64url.js';
 import { generateKeyPair } from '@stablelib/ed25519';
 
 export interface PASERKPublicKeyPair {

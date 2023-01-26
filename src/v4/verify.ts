@@ -1,13 +1,13 @@
-import { Footer, Payload } from '../lib/types';
-import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES } from '../lib/magic';
-import { parseAssertion, parseFooter, parseKeyData, parsePayload, parsePublicToken } from '../lib/parse';
+import { Footer, Payload } from '../lib/types.js';
+import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES } from '../lib/magic.js';
+import { parseAssertion, parseFooter, parseKeyData, parsePayload, parsePublicToken } from '../lib/parse.js';
 
-import { PAE } from '../lib/pae';
-import { PasetoSignatureInvalid } from '../lib/errors';
+import { PAE } from '../lib/pae.js';
+import { PasetoSignatureInvalid } from '../lib/errors.js';
 import { verify as ed25519Verify } from '@stablelib/ed25519';
-import { returnPossibleJson } from '../lib/json';
-import { uint8ArrayToString } from '../lib/uint8array';
-import { validateToken } from '../lib/validate';
+import { returnPossibleJson } from '../lib/json.js';
+import { uint8ArrayToString } from '../lib/uint8array.js';
+import { validateToken } from '../lib/validate.js';
 
 /**
  * Verifies a PASETO v4.public token using the supplied Ed25519 public key.

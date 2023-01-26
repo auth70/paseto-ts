@@ -1,10 +1,10 @@
-import type { Footer, Payload } from "../lib/types";
-import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES, TOKEN_MAGIC_STRINGS } from "../lib/magic";
-import { concat, payloadToUint8Array } from "../lib/uint8array";
-import { parseAssertion, parseFooter, parseKeyData, parsePayload } from "../lib/parse";
+import type { Footer, Payload } from "../lib/types.js";
+import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES, TOKEN_MAGIC_STRINGS } from "../lib/magic.js";
+import { concat, payloadToUint8Array } from "../lib/uint8array.js";
+import { parseAssertion, parseFooter, parseKeyData, parsePayload } from "../lib/parse.js";
 
-import { PAE } from "../lib/pae";
-import { base64UrlEncode } from "../lib/base64url";
+import { PAE } from "../lib/pae.js";
+import { base64UrlEncode } from "../lib/base64url.js";
 import { sign as ed25519Sign } from '@stablelib/ed25519';
 
 const EMPTY_BUFFER = new Uint8Array(0);

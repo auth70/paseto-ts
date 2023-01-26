@@ -1,8 +1,5 @@
-import type { Footer, Payload } from "./types";
-import { PasetoClaimInvalid, PasetoPayloadInvalid, PasetoTokenInvalid } from "./errors";
-import { TOKEN_MAGIC_BYTES, TOKEN_MAGIC_STRINGS } from "./magic";
-import { assertJsonStringSize, countKeys, getJsonDepth } from './json';
-import { stringToUint8Array, uint8ArrayToString } from "./uint8array";
+import { PasetoClaimInvalid, PasetoPayloadInvalid, PasetoTokenInvalid } from "./errors.js";
+import { TOKEN_MAGIC_BYTES, TOKEN_MAGIC_STRINGS } from "./magic.js";
 
 export function isObject(val: any): boolean {
     return !!val && val.constructor == Object;

@@ -1,12 +1,12 @@
-import { Footer, Payload } from "../lib/types";
-import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES } from "../lib/magic";
-import { constantTimeEqual, validateToken } from "../lib/validate";
-import { deriveEncryptionAndAuthKeys, parseAssertion, parseFooter, parseKeyData, parseLocalToken, parsePayload } from "../lib/parse";
+import { Footer, Payload } from "../lib/types.js";
+import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES } from "../lib/magic.js";
+import { constantTimeEqual, validateToken } from "../lib/validate.js";
+import { deriveEncryptionAndAuthKeys, parseAssertion, parseFooter, parseKeyData, parseLocalToken, parsePayload } from "../lib/parse.js";
 
-import { PAE } from "../lib/pae";
-import { PasetoDecryptionFailed } from '../lib/errors';
+import { PAE } from "../lib/pae.js";
+import { PasetoDecryptionFailed } from '../lib/errors.js';
 import { hash } from "@stablelib/blake2b";
-import { returnPossibleJson } from "../lib/json";
+import { returnPossibleJson } from "../lib/json.js";
 import { streamXOR } from "@stablelib/xchacha20";
 
 /**

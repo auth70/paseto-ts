@@ -1,7 +1,7 @@
-import { decrypt } from './decrypt';
-import { encrypt } from './encrypt';
-import { generateKeys } from './key';
-import { sign } from './sign';
-import { verify } from './verify';
+import { decrypt } from './decrypt.js';
+import { encrypt } from './encrypt.js';
+import { generateKeys } from './key.js';
+import { sign } from './sign.js';
+import { verify } from './verify.js';
 
 export { sign, verify, decrypt, encrypt, generateKeys };

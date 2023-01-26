@@ -1,5 +1,5 @@
-import { PasetoInvalid } from "./errors";
-import { isObject } from "./validate";
+import { PasetoInvalid } from "./errors.js";
+import { isObject } from "./validate.js";
 
 const decoder = new TextDecoder();
 const encoder = new TextEncoder();

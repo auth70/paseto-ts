@@ -1,12 +1,12 @@
-import { AUTH_BYTES, KEY_BYTES, KEY_LENGTHS, KEY_MAGIC_BYTES, KEY_MAGIC_STRINGS } from "./magic";
-import { Footer, Payload } from "./types";
-import { PasetoClaimInvalid, PasetoKeyInvalid, PasetoPayloadInvalid, PasetoPurposeInvalid, PasetoTokenInvalid } from "./errors";
-import { concat, stringToUint8Array, uint8ArrayToString } from "./uint8array";
-import { constantTimeEqual, isObject, validateFooterClaims, validateISODate, validateToken } from "./validate";
-import { parseTime, parseTimeString } from "./time";
+import { AUTH_BYTES, KEY_BYTES, KEY_LENGTHS, KEY_MAGIC_BYTES, KEY_MAGIC_STRINGS } from "./magic.js";
+import { Footer, Payload } from "./types.js";
+import { PasetoClaimInvalid, PasetoKeyInvalid, PasetoPayloadInvalid, PasetoPurposeInvalid, PasetoTokenInvalid } from "./errors.js";
+import { concat, stringToUint8Array, uint8ArrayToString } from "./uint8array.js";
+import { constantTimeEqual, isObject, validateFooterClaims, validateISODate, validateToken } from "./validate.js";
+import { parseTime, parseTimeString } from "./time.js";
 
-import { assertJsonStringSize } from "./json";
-import { base64UrlDecode } from "./base64url";
+import { assertJsonStringSize } from "./json.js";
+import { base64UrlDecode } from "./base64url.js";
 import { hash } from "@stablelib/blake2b";
 
 /**

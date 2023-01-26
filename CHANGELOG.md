@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0 (2023-01-26)
+
+- Refactored imports to use `.js` extension.
+
 ## 1.2.0 (2023-01-26)
 
 - `encrypt` accepts a `Payload` object instead of string and Uint8Array.

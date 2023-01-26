@@ -1,4 +1,4 @@
-import { stringToUint8Array } from "./uint8array";
+import { stringToUint8Array } from "./uint8array.js";
 
 /**
  * Accepted magic strings for each purpose
