@@ -13,7 +13,7 @@ import { validateToken } from '../lib/validate';
  * Verifies a PASETO v4.public token using the supplied Ed25519 public key.
  * The public key must have the version and purpose of `k4.public`.
  * @param {string | Uint8Array} key Ed25519 public key to verify with
- * @param {Uint8Array | Payload | string} token PASETO v4.public token to verify
+ * @param {string | Uint8Array} token PASETO v4.public token to verify
  * @param {object} options Options
  * @param {string | Uint8Array} options.assertion Optional assertion
  * @param {number} options.maxDepth Maximum depth of nested objects in the payload and footer; defaults to 32

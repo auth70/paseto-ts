@@ -1,8 +1,8 @@
+import { Footer, Payload } from "../lib/types";
 import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES, TOKEN_MAGIC_STRINGS } from "../lib/magic";
 import { concat, payloadToUint8Array } from "../lib/uint8array";
 import { deriveEncryptionAndAuthKeys, parseAssertion, parseFooter, parsePayload } from "../lib/parse";
 
-import { Footer } from "../lib/types";
 import { PAE } from "../lib/pae";
 import { base64UrlEncode } from "../lib/base64url";
 import { hash } from "@stablelib/blake2b";
@@ -24,7 +24,7 @@ import { streamXOR } from "@stablelib/xchacha20";
  */
 export function encrypt(
     key: string | Uint8Array,
-    payload: string | Uint8Array,
+    payload: Payload | string | Uint8Array,
     {
         footer = new Uint8Array(0),
         assertion = new Uint8Array(0),

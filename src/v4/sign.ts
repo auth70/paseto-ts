@@ -13,7 +13,7 @@ const EMPTY_BUFFER = new Uint8Array(0);
  * Signs a payload using an Ed25519 secret key and returns a PASETO v4.public token.
  * The secret key must have the version and purpose of `k4.secret`.
  * @param {string | Uint8Array} key Ed25519 secret key to sign with
- * @param {Uint8Array | Payload | string} payload Payload to sign
+ * @param {Payload | string | Uint8Array} payload Payload to sign
  * @param {object} options Options
  * @param {Footer | string | Uint8Array} options.footer Optional footer
  * @param {string | Uint8Array} options.assertion Optional assertion
@@ -26,7 +26,7 @@ const EMPTY_BUFFER = new Uint8Array(0);
  */
 export function sign(
     key: string | Uint8Array,
-    payload: Uint8Array | Payload | string,
+    payload: Payload | string | Uint8Array,
     {
         footer = new Uint8Array(0),
         assertion = new Uint8Array(0),
