@@ -3,6 +3,7 @@ import { concat, stringToUint8Array } from '../lib/uint8array.js';
 
 import { base64UrlEncode } from '../lib/base64url.js';
 import { generateKeyPair } from '@stablelib/ed25519';
+import type { GetRandomValues } from '../lib/types.js';
 
 export interface PASERKPublicKeyPair {
     secretKey: string;
@@ -22,23 +23,33 @@ export interface PASERKPublicKeyPairBuffer {
  * 
  * To use the generated key(s) in another PASETO implementation, specify the format as `paserk`.
  * @param {string} purpose `local` (encrypt/decrypt) or `public` (sign/verify)
- * @param {string} format `paserk` (PASERK) or `buffer` (Uint8Array)
+ * @param {object} options Options
+ * @param {string} options.format Format of the returned key(s) (`paserk` (PASERK) or `buffer` (Uint8Array)); defaults to `paserk`
+ * @param {(length: number): Uint8Array} options.getRandomValues Optional crypto.getRandomValues implementation (for Node < 19)
  * @returns {string | Uint8Array | PASERKPublicKeyPair | PASERKPublicKeyPairBuffer} Private and public key pair for `public` purpose, secret key for `local` purpose
  * @see https://github.com/paseto-standard/paseto-spec/blob/master/docs/02-Implementation-Guide/03-Algorithm-Lucidity.md#paseto-cryptography-key-requirements
  */
-export function generateKeys(purpose: 'local', format?: 'paserk'): string
-export function generateKeys(purpose: 'local', format?: 'buffer'): Uint8Array
-export function generateKeys(purpose: 'public', format?: 'paserk'): PASERKPublicKeyPair
-export function generateKeys(purpose: 'public', format?: 'buffer'): PASERKPublicKeyPairBuffer
-export function generateKeys(purpose: 'local' | 'public', format: 'paserk' | 'buffer' | undefined = 'paserk'): string | Uint8Array | PASERKPublicKeyPair | PASERKPublicKeyPairBuffer {
+export function generateKeys(purpose: 'local', opts?: { format?: 'paserk', getRandomValues?: GetRandomValues }): string
+export function generateKeys(purpose: 'local', opts?: { format?: 'buffer', getRandomValues?: GetRandomValues }): Uint8Array
+export function generateKeys(purpose: 'public', opts?: { format?: 'paserk', getRandomValues?: GetRandomValues }): PASERKPublicKeyPair
+export function generateKeys(purpose: 'public', opts?: { format?: 'buffer', getRandomValues?: GetRandomValues }): PASERKPublicKeyPairBuffer
+export function generateKeys(purpose: 'local' | 'public', opts: { format?: 'paserk' | 'buffer' | undefined, getRandomValues?: GetRandomValues } = { format: 'paserk' }): string | Uint8Array | PASERKPublicKeyPair | PASERKPublicKeyPairBuffer {
 
     let ret;
+    const format = opts?.format ?? 'paserk';
+    const getRandomValues = opts?.getRandomValues ?? globalThis.crypto?.getRandomValues as GetRandomValues;
+
+    if(!getRandomValues) {
+        throw new Error('No compatible getRandomValues implementation detected in the global scope. Please pass a getRandomValues implementation to the options object (signature: getRandomValues<Uint8Array>(array: Uint8Array): Uint8Array)');
+    }
 
     switch (purpose) {
         case 'local':
             // For local keys, we generate a random 32-byte key
-            const random = new Uint8Array(32);
-            crypto.getRandomValues(random);
+            const random = getRandomValues(new Uint8Array(32));
+            if(random === null) {
+                throw new Error('getRandomValues returned an invalid length Uint8Array');
+            }
             switch (format) {
                 case 'paserk':
                     ret = `k4.local.${base64UrlEncode(random)}`;

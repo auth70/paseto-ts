@@ -4,8 +4,6 @@ import { parseTime, parseTimeString } from '../../src/lib/time';
 
 import { test } from 'uvu';
 
-globalThis.crypto = crypto;
-
 test('parseTimeString throws with an invalid time string', () => {
     assert.throws(() => parseTimeString('foo'));
 });

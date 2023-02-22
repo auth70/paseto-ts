@@ -1,5 +1,4 @@
 import * as assert from 'uvu/assert';
-import * as crypto from 'node:crypto';
 
 import { KEY_MAGIC_BYTES } from '../../../src/lib/magic';
 import { base64UrlDecodeString } from '../../../src/lib/base64url';
@@ -9,12 +8,9 @@ import { encrypt } from '../../../src/v4/encrypt';
 import { isObject } from '../../../src/lib/validate';
 import { test } from 'uvu';
 
-globalThis.crypto = crypto;
-
 function hexToUint8array(hex: string) {
     return new Uint8Array(hex.match(/.{1,2}/g)!.map(byte => parseInt(byte, 16)));
 }
-
 
 const v4 = {
     "name": "PASETO v4 Test Vectors",

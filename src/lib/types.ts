@@ -16,3 +16,5 @@ export interface Footer {
     kid?: string;
     wpk?: string;
 }
+
+export type GetRandomValues = (array: Uint8Array) => Uint8Array;

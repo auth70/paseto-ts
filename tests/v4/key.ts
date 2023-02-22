@@ -1,18 +1,21 @@
 import * as assert from 'uvu/assert';
-import * as crypto from 'node:crypto';
+import * as crypto from 'crypto';
 
 import { PasetoFormatInvalid, PasetoPurposeInvalid } from '../../src/lib/errors';
 
 import { base64UrlDecode } from '../../src/lib/base64url';
 import { generateKeys } from '../../src/v4/key';
-import { stringToUint8Array } from '../../src/lib/uint8array';
 import { test } from 'uvu';
 
-globalThis.crypto = crypto;
+const getRandomValues = (array: Uint8Array): Uint8Array => {
+    const bytes = crypto.randomBytes(array.length);
+    array.set(bytes);
+    return array;
+};
 
 test('it throws with a bad purpose', async () => {
     try {
-        const keys = generateKeys('badpurpose' as any);
+        const keys = generateKeys('badpurpose' as any, { getRandomValues });
         assert.unreachable('should have thrown');
     } catch (err) {
         assert.instance(err, PasetoPurposeInvalid);
@@ -22,7 +25,7 @@ test('it throws with a bad purpose', async () => {
 
 test('it throws with a bad format', async () => {
     try {
-        const keys = generateKeys('local', 'päserk' as any);
+        const keys = generateKeys('local', { format: 'päserk' as any, getRandomValues });
         assert.unreachable('should have thrown');
     } catch (err) {
         assert.instance(err, PasetoFormatInvalid);
@@ -30,7 +33,7 @@ test('it throws with a bad format', async () => {
     }
 
     try {
-        const keys = generateKeys('public', 'päserk' as any);
+        const keys = generateKeys('public', { format: 'päserk' as any, getRandomValues });
         assert.unreachable('should have thrown');
     } catch (err) {
         assert.instance(err, PasetoFormatInvalid);
@@ -39,7 +42,7 @@ test('it throws with a bad format', async () => {
 });
 
 test('generates a random secret key for local purpose (paserk)', async () => {
-    const key = generateKeys('local', 'paserk');
+    const key = generateKeys('local', { format: 'paserk', getRandomValues });
     assert.type(key, 'string');
     assert.is(key.startsWith('k4.local.'), true);
     assert.is(key.split('.')[2].length, 43);
@@ -47,7 +50,7 @@ test('generates a random secret key for local purpose (paserk)', async () => {
 });
 
 test('generates a random secret key for local purpose (buffer)', async () => {
-    const key = generateKeys('local', 'buffer');
+    const key = generateKeys('local', { format: 'buffer', getRandomValues });
     const keyStr = new TextDecoder().decode(key);
     assert.is(key instanceof Uint8Array, true);
     assert.is(key.byteLength, 41);
@@ -56,7 +59,7 @@ test('generates a random secret key for local purpose (buffer)', async () => {
 });
 
 test('generates a random key pair for public purpose (paserk)', async () => {
-    const keyPair = generateKeys('public', 'paserk');
+    const keyPair = generateKeys('public', { format: 'paserk', getRandomValues });
     assert.type(keyPair, 'object');
     assert.type(keyPair.secretKey, 'string');
     assert.type(keyPair.publicKey, 'string');
@@ -69,7 +72,7 @@ test('generates a random key pair for public purpose (paserk)', async () => {
 });
 
 test('generates a random key pair for public purpose (buffer)', async () => {
-    const keyPair = generateKeys('public', 'buffer');
+    const keyPair = generateKeys('public', { format: 'buffer', getRandomValues });
     const secretKeyStr = new TextDecoder().decode(keyPair.secretKey);
     const publicKeyStr = new TextDecoder().decode(keyPair.publicKey);
     assert.is(keyPair.secretKey instanceof Uint8Array, true);
@@ -83,11 +86,24 @@ test('generates a random key pair for public purpose (buffer)', async () => {
 });
 
 test('it defaults to paserk format', async () => {
-    const key = generateKeys('local');
+    const key = generateKeys('local', { getRandomValues });
     assert.type(key, 'string');
     assert.is(key.startsWith('k4.local.'), true);
     assert.is(key.split('.')[2].length, 43);
     assert.is(base64UrlDecode(key.split('.')[2]).byteLength, 32);
+});
+
+test('on node 19, getRandomValues is not needed', async () => {
+    const version = process.version;
+    if (version.startsWith('v19')) {
+        const key = generateKeys('local', { getRandomValues });
+        assert.type(key, 'string');
+        assert.is(key.startsWith('k4.local.'), true);
+        assert.is(key.split('.')[2].length, 43);
+        assert.is(base64UrlDecode(key.split('.')[2]).byteLength, 32);
+    } else {
+        console.log('skipping test, not node 19');
+    }
 });
 
 test.run();

@@ -10,8 +10,6 @@ import { constantTimeEqual } from '../../src/lib/validate';
 import { generateKeys } from '../../src/v4/key';
 import { test } from 'uvu';
 
-globalThis.crypto = crypto;
-
 const LOCAL_KEY = 'k4.local.xqT1zDwAZcNCTd5Ee1B0Wpcjx-xpjbe5oNsFQfEEf-M';
 const LOCAL_KEY_BYTES = new Uint8Array([107,  52,  46, 108, 111,  99,  97, 108, 46, 198, 164, 245, 204,  60,   0, 101, 195, 66, 77, 222,  68, 123,  80, 116,  90, 151, 35, 199, 236, 105, 141, 183, 185, 160, 219,  5, 65, 241,   4, 127, 227]);
 const ACTUAL_KEY_BYTES = new Uint8Array([198, 164, 245, 204,  60,   0, 101, 195, 66,  77, 222,  68, 123,  80, 116,  90, 151,  35, 199, 236, 105, 141, 183, 185, 160, 219,   5,  65, 241,   4, 127, 227]);

@@ -4,11 +4,8 @@ import { PasetoClaimInvalid, PasetoKeyInvalid, PasetoPayloadInvalid } from '../.
 import { stringToUint8Array, uint8ArrayToString } from '../../src/lib/uint8array';
 
 import { base64UrlDecode } from '../../src/lib/base64url';
-import { generateKeys } from '../../src/v4/key';
 import { sign } from '../../src/v4/sign';
 import { test } from 'uvu';
-
-globalThis.crypto = crypto;
 
 const keys = {
     secretKey: 'k4.secret.LMThyMVJEesfQX93MJsB77ISs8Ya9YnaEw3Qk-lZvlD7QjtJYfpqqXLflv8Oa82ganJzicoFxwgtcjdc5jMCYA',

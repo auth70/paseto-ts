@@ -25,7 +25,24 @@ This library implements the `k4.local`, `k4.public` and `k4.secret` [PASERK](htt
 
 ## Usage
 
-This library is an ES module (tsconfig module/target ES2022). It will not work in commonjs environments without a transpilation step.
+This library is an ES module (tsconfig module/target ES2022). It will not work in commonjs environments without a transpilation step. It has been tested in Node > 16 and modern browsers. As it depends on the Web Crypto API being available, Deno and Bun should work, but are not tested.
+
+### Note on Node versions under 19
+
+If you encounter the error `crypto is not defined` using the `generateKeys` and `encrypt` functions, you need to pass an implementation of the `getRandomValues` function as an option. This is because Node versions under 19 do not have a global `crypto` object.
+
+```ts
+import * as crypto from 'node:crypto';
+import { generateKeys } from 'paseto-ts/v4';
+
+const getRandomValues = (array: Uint8Array): Uint8Array => {
+    const bytes = crypto.randomBytes(array.length);
+    array.set(bytes);
+    return array;
+};
+
+generateKeys('local', { format: 'paserk', getRandomValues });
+```
 
 ### `iat`, `exp` and `nbf` claims
 
@@ -72,7 +89,7 @@ If you need the key as a buffer, you can pass in `buffer` as the second argument
 ```ts
 import { generateKeys } from 'paseto-ts/v4';
 
-const localKeyBuffer = generateKeys('local', 'buffer');
+const localKeyBuffer = generateKeys('local', { format: 'buffer' });
 // localKeyBuffer: Uint8Array(41)
 ```
 
@@ -103,6 +120,8 @@ try {
             maxKeys, // number; defaults to 128. 0 to disable
             // Optional: If true, the payload will be validated against the registered claims.
             validatePayload, // boolean; defaults to true
+            // Optional: crypto.getRandomValues implementation (for Node < 19)
+            getRandomValues, // (array: Uint8Array) => Uint8Array
         }
     );
 
@@ -183,7 +202,7 @@ If you need the keys as buffers, you can pass in `buffer` as the second argument
 ```ts
 import { generateKeys } from 'paseto-ts/v4';
 
-const { secretKey, publicKey } = generateKeys('public', 'buffer');
+const { secretKey, publicKey } = generateKeys('public', { format: 'buffer' });
 // secretKey: Uint8Array(41)
 // publicKey: Uint8Array(41)
 ```

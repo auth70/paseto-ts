@@ -2,6 +2,7 @@ import { Footer, Payload } from "../lib/types.js";
 import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES, TOKEN_MAGIC_STRINGS } from "../lib/magic.js";
 import { concat, payloadToUint8Array } from "../lib/uint8array.js";
 import { deriveEncryptionAndAuthKeys, parseAssertion, parseFooter, parsePayload } from "../lib/parse.js";
+import type { GetRandomValues } from '../lib/types.js';
 
 import { PAE } from "../lib/pae.js";
 import { base64UrlEncode } from "../lib/base64url.js";
@@ -19,6 +20,7 @@ import { streamXOR } from "@stablelib/xchacha20";
  * @param {string | Uint8Array} options.assertion Optional assertion
  * @param {number} options.maxDepth Maximum depth of nested objects in the payload and footer; defaults to 32
  * @param {number} options.maxKeys Maximum number of keys in an object in the payload and footer; defaults to 128
+ * @param {(array: Uint8Array): Uint8Array} options.getRandomValues Optional crypto.getRandomValues implementation (for Node < 19)
  * @returns {string} PASETO v4.local token
  * @see https://github.com/paseto-standard/paseto-spec/blob/master/docs/01-Protocol-Versions/Version4.md#encrypt
  */
@@ -33,6 +35,7 @@ export function encrypt(
         maxDepth = MAX_DEPTH_DEFAULT,
         maxKeys = MAX_KEYS_DEFAULT,
         validatePayload = true,
+        getRandomValues = undefined,
     }:
     {
         footer?: Footer | string | Uint8Array;
@@ -42,6 +45,7 @@ export function encrypt(
         maxDepth?: number;
         maxKeys?: number;
         validatePayload?: boolean;
+        getRandomValues?: GetRandomValues;
     } = {
         footer: new Uint8Array(0),
         assertion: new Uint8Array(0),
@@ -50,11 +54,18 @@ export function encrypt(
         maxDepth: MAX_DEPTH_DEFAULT,
         maxKeys: MAX_KEYS_DEFAULT,
         validatePayload: true,
+        getRandomValues: undefined,
     }
 ): string {
     
     // Assert that key is intended for use with v4.local tokens and has a length of 256 bits (32 bytes)
     key = parseKeyData('local', key);
+
+    getRandomValues = getRandomValues || globalThis.crypto?.getRandomValues;
+
+    if(!getRandomValues) {
+        throw new Error('No compatible getRandomValues implementation detected in the global scope. Please pass a getRandomValues implementation to the options object (signature: getRandomValues<Uint8Array>(array: Uint8Array): Uint8Array)');
+    }
 
     const payloadUint8 = payloadToUint8Array(parsePayload(payload, {
         addExp: !!addExp,
@@ -74,7 +85,7 @@ export function encrypt(
     assertion = parseAssertion(assertion);
     
     // Generate 32 random bytes from the OS's CSPRNG
-    const nonce = crypto.getRandomValues(new Uint8Array(32));
+    const nonce = getRandomValues(new Uint8Array(32));
 
     // Derive encryption and authentication keys from the key and nonce
     const { encryptionKey, counterNonce, authKey } = deriveEncryptionAndAuthKeys(key, nonce);

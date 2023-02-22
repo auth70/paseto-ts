@@ -4,8 +4,6 @@ import { PasetoDecryptionFailed } from '../../src/lib/errors';
 import { decrypt } from '../../src/v4/decrypt';
 import { test } from 'uvu';
 
-globalThis.crypto = crypto;
-
 const key = 'k4.local.TTcJUvQkRlymND41zGOLoykZNhoIKk1jtr82bTl9EHA';
 const MESSAGE = '{"sub":"johndoe","iat":"2023-01-09T15:34:46.865Z"}';
 const MESSAGE_OBJ = {
