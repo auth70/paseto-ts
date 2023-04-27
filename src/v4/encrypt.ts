@@ -61,7 +61,7 @@ export function encrypt(
     // Assert that key is intended for use with v4.local tokens and has a length of 256 bits (32 bytes)
     key = parseKeyData('local', key);
 
-    getRandomValues = getRandomValues || globalThis.crypto?.getRandomValues;
+    getRandomValues = getRandomValues || crypto?.getRandomValues;
 
     if(!getRandomValues) {
         throw new Error('No compatible getRandomValues implementation detected in the global scope. Please pass a getRandomValues implementation to the options object (signature: getRandomValues<Uint8Array>(array: Uint8Array): Uint8Array)');
