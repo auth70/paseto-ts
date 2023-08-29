@@ -51,6 +51,10 @@
     "./v4": {
       "types": "./dist/v4/index.d.ts",
       "import": "./dist/v4/index.js"
+    },
+    "./types": {
+      "types": "./dist/lib/types.d.ts",
+      "import": "./dist/lib/types.js"
     }
   },
   "typesVersions": {
