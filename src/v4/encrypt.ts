@@ -1,4 +1,4 @@
-import { Footer, Payload } from "../lib/types.js";
+import type { Assertion, Footer, Payload } from "../lib/types.js";
 import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES, TOKEN_MAGIC_STRINGS } from "../lib/magic.js";
 import { concat, payloadToUint8Array } from "../lib/uint8array.js";
 import { deriveEncryptionAndAuthKeys, parseAssertion, parseFooter, parsePayload } from "../lib/parse.js";
@@ -17,7 +17,7 @@ import { streamXOR } from "@stablelib/xchacha20";
  * @param {Payload | string | Uint8array} payload Payload to encrypt
  * @param {object} options Options
  * @param {Footer | string | Uint8Array} options.footer Optional footer
- * @param {string | Uint8Array} options.assertion Optional assertion
+ * @param {Assertion | string | Uint8Array} options.assertion Optional assertion
  * @param {number} options.maxDepth Maximum depth of nested objects in the payload and footer; defaults to 32
  * @param {number} options.maxKeys Maximum number of keys in an object in the payload and footer; defaults to 128
  * @param {(array: Uint8Array): Uint8Array} options.getRandomValues Optional crypto.getRandomValues implementation (for Node < 19)
@@ -39,7 +39,7 @@ export function encrypt(
     }:
     {
         footer?: Footer | string | Uint8Array;
-        assertion?: string | Uint8Array;
+        assertion?: Assertion | string | Uint8Array;
         addIat?: boolean;
         addExp?: boolean;
         maxDepth?: number;
@@ -104,7 +104,7 @@ export function encrypt(
         nonce,
         ciphertext,
         footerUint8,
-        assertion
+        assertion as Uint8Array,
     );
 
     // Calculate BLAKE2b-MAC of the output of preAuth using Ak as the authentication key

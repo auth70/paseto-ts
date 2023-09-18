@@ -1,4 +1,4 @@
-import type { Footer, Payload } from "../lib/types.js";
+import type { Footer, Payload, Assertion } from "../lib/types.js";
 import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES, TOKEN_MAGIC_STRINGS } from "../lib/magic.js";
 import { concat, payloadToUint8Array } from "../lib/uint8array.js";
 import { parseAssertion, parseFooter, parseKeyData, parsePayload } from "../lib/parse.js";
@@ -16,7 +16,7 @@ const EMPTY_BUFFER = new Uint8Array(0);
  * @param {Payload | string | Uint8Array} payload Payload to sign
  * @param {object} options Options
  * @param {Footer | string | Uint8Array} options.footer Optional footer
- * @param {string | Uint8Array} options.assertion Optional assertion
+ * @param {Assertion | string | Uint8Array} options.assertion Optional assertion
  * @param {boolean} options.addIat Add an iat claim if one is not provided; defaults to true
  * @param {boolean} options.addExp Add an exp claim if one is not provided; defaults to true
  * @param {number} options.maxDepth Maximum depth of nested objects in the payload; defaults to 32
@@ -37,7 +37,7 @@ export function sign(
         validatePayload = true, // Validate the payload
     }: {
         footer?: Footer | string | Uint8Array;
-        assertion?: string | Uint8Array,
+        assertion?: Assertion | string | Uint8Array;
         addExp?: boolean;
         addIat?: boolean;
         maxDepth?: number;
@@ -79,7 +79,7 @@ export function sign(
         TOKEN_MAGIC_BYTES.v4.public,
         payloadUint8,
         footerUint8,
-        assertion,
+        assertion as Uint8Array,
     );
 
     // Sign m2 using Ed25519 secret key

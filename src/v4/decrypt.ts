@@ -1,4 +1,4 @@
-import { Footer, Payload } from "../lib/types.js";
+import type { Assertion, Footer, Payload } from "../lib/types.js";
 import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES } from "../lib/magic.js";
 import { constantTimeEqual, validateToken } from "../lib/validate.js";
 import { deriveEncryptionAndAuthKeys, parseAssertion, parseFooter, parseKeyData, parseLocalToken, parsePayload } from "../lib/parse.js";
@@ -15,14 +15,14 @@ import { streamXOR } from "@stablelib/xchacha20";
  * @param {string | Uint8Array} key 32 byte key used to encrypt the message. Must be prepended with `k4.local.`.
  * @param {string | Uint8Array} token PASETO v4.local token
  * @param {object} options Options
- * @param {string | Uint8Array} options.footer Optional footer
- * @param {string | Uint8Array} options.assertion Optional assertion
+ * @param {Footer | string | Uint8Array} options.footer Optional footer
+ * @param {Assertion | string | Uint8Array} options.assertion Optional assertion
  * @param {number} options.maxDepth Maximum depth of nested objects in the payload and footer; defaults to 32
  * @param {number} options.maxKeys Maximum number of keys in an object in the payload and footer; defaults to 128
  * @returns {Uint8Array} Decrypted payload
  * @see https://github.com/paseto-standard/paseto-spec/blob/master/docs/01-Protocol-Versions/Version4.md#decrypt
  */
-export function decrypt(
+export function decrypt<T extends { [key: string]: any } = { [key: string]: any }>(
     key: string | Uint8Array,
     token: string | Uint8Array,
     {
@@ -31,7 +31,7 @@ export function decrypt(
         maxKeys = MAX_KEYS_DEFAULT,
         validatePayload = true,
     }: {
-        assertion?: string | Uint8Array;
+        assertion?: Assertion | string | Uint8Array;
         maxDepth?: number;
         maxKeys?: number;
         validatePayload?: boolean;
@@ -42,7 +42,7 @@ export function decrypt(
         validatePayload: true,
     }
 ): {
-    payload: Payload,
+    payload: Payload & T,
     footer: Footer | string,
 } {
 
@@ -73,7 +73,7 @@ export function decrypt(
         nonce,
         ciphertext,
         footer,
-        assertion,
+        assertion as Uint8Array,
     );
 
     // Calculate tag2 from pre-auth and auth key
@@ -92,7 +92,7 @@ export function decrypt(
             addExp: false,
             addIat: false,
             validate: !!validatePayload,
-        }),
+        }) as Payload & T,
         footer: returnPossibleJson(footer)
     };
 

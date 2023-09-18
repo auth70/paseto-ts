@@ -3,7 +3,7 @@ import * as crypto from 'node:crypto';
 
 import { PasetoKeyInvalid, PasetoPurposeInvalid, PasetoTokenInvalid } from '../../src/lib/errors';
 import { concat, stringToUint8Array, uint8ArrayToString } from '../../src/lib/uint8array';
-import { parseFooter, parseKeyData, parseLocalToken, parsePayload, parsePublicToken } from '../../src/lib/parse';
+import { parseAssertion, parseFooter, parseKeyData, parseLocalToken, parsePayload, parsePublicToken } from '../../src/lib/parse';
 
 import { base64UrlDecode } from '../../src/lib/base64url';
 import { constantTimeEqual } from '../../src/lib/validate';
@@ -350,6 +350,25 @@ test('parsePublicToken throws if payload is less than 32 bytes', () => {
     assert.throws(() => {
         parsePublicToken('v4.public.AAAAAAAAAAAAAAAAAAAAAAAAA');
     });
+});
+
+// 
+// parseAssertion
+//
+
+test('parseAssertion returns an Uint8array from a string', () => {
+    const assertion = parseAssertion('{"sub":"123"}');
+    assert.ok(assertion instanceof Uint8Array);
+});
+
+test('parseAssertion returns an Uint8array from an object', () => {
+    const assertion = parseAssertion({ sub: '123' });
+    assert.ok(assertion instanceof Uint8Array);
+});
+
+test('parseAssertion returns an Uint8array from an Uint8Array', () => {
+    const assertion = parseAssertion(stringToUint8Array('{"sub":"123"}'));
+    assert.ok(assertion instanceof Uint8Array);
 });
 
 test.run();

@@ -47,7 +47,7 @@ test('it throws if the token is invalid', async () => {
 
 test('it throws if the token is invalid', async () => {
     try {
-        const result = verify(keys.publicKey, PANVA_TOKEN+'a');
+        const result = verify<{ foo: string }>(keys.publicKey, PANVA_TOKEN+'a');
         assert.unreachable('should have thrown');
     } catch (err) {
         assert.instance(err, PasetoSignatureInvalid);

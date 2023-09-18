@@ -520,34 +520,7 @@ test('it throws if footer contains a wpk or kid claim thats invalid type', async
 // Assertion
 // 
 
-test('it throws if assertion is not a string or Uint8Array', async () => {
-
-    try {
-        const token = sign(keys.secretKey, MESSAGE, {
-            assertion: 123 as any
-        })
-        assert.unreachable('should have thrown');
-    } catch (err) {
-        assert.instance(err, TypeError);
-    }
-
-    try {
-        const token = sign(keys.secretKey, MESSAGE, {
-            assertion: true as any
-        })
-        assert.unreachable('should have thrown');
-    } catch (err) {
-        assert.instance(err, TypeError);
-    }
-
-    try {
-        const token = sign(keys.secretKey, MESSAGE, {
-            assertion: {} as any
-        })
-        assert.unreachable('should have thrown');
-    } catch (err) {
-        assert.instance(err, TypeError);
-    }
+test('it throws if assertion is not an object, string or Uint8Array', async () => {
 
     try {
         const token = sign(keys.secretKey, MESSAGE, {

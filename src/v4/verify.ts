@@ -1,4 +1,4 @@
-import { Footer, Payload } from '../lib/types.js';
+import type { Footer, Assertion, Payload } from '../lib/types.js';
 import { MAX_DEPTH_DEFAULT, MAX_KEYS_DEFAULT, TOKEN_MAGIC_BYTES } from '../lib/magic.js';
 import { parseAssertion, parseFooter, parseKeyData, parsePayload, parsePublicToken } from '../lib/parse.js';
 
@@ -15,13 +15,13 @@ import { validateToken } from '../lib/validate.js';
  * @param {string | Uint8Array} key Ed25519 public key to verify with
  * @param {string | Uint8Array} token PASETO v4.public token to verify
  * @param {object} options Options
- * @param {string | Uint8Array} options.assertion Optional assertion
+ * @param {Assertion | string | Uint8Array} options.assertion Optional assertion
  * @param {number} options.maxDepth Maximum depth of nested objects in the payload and footer; defaults to 32
  * @param {number} options.maxKeys Maximum number of keys in an object in the payload and footer; defaults to 128
  * @returns {object} Object containing the payload and footer
  * @see https://github.com/paseto-standard/paseto-spec/blob/master/docs/01-Protocol-Versions/Version4.md#verify
  */
-export function verify(
+export function verify<T extends { [key: string]: any } = { [key: string]: any }>(
     key: string | Uint8Array,
     token: string | Uint8Array,
     {
@@ -31,7 +31,7 @@ export function verify(
         validatePayload = true,
     }:
     {
-        assertion?: string | Uint8Array;
+        assertion?: Assertion | string | Uint8Array;
         maxDepth?: number;
         maxKeys?: number;
         validatePayload?: boolean;
@@ -42,7 +42,7 @@ export function verify(
         validatePayload: true,
     }
 ): {
-    payload: Payload;
+    payload: Payload & T;
     footer?: Footer | string;
 } {
 
@@ -71,7 +71,7 @@ export function verify(
         TOKEN_MAGIC_BYTES.v4.public,
         message,
         footer,
-        assertion
+        assertion as Uint8Array,
     );
 
     // Use Ed25519 to verify signature
@@ -91,7 +91,7 @@ export function verify(
             maxDepth,
             maxKeys,
             validate: !!validatePayload,
-        }),
+        }) as Payload & T,
         footer: returnPossibleJson(footer)
     };
 }

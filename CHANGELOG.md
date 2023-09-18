@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.5.0 (2023-09-18)
+
+- Support objects in assertions
+- Export `Assertion` type
+
+`encrypt` and `verify` now support passing in an object as a generic type parameter. This can be used to give you type safety on the token payload:
+
+```ts
+const baz = verify<{ foo: string }>(key, token);
+baz.foo; // string
+```
+
+## 1.4.4 (2023-09-17)
+
+- Dependency updates
+- Expose every file under `lib` in package.json (`import { base64UrlEncode } from 'paseto-ts/lib/base64url'`, etc.)
+
+## 1.4.3 (2023-06-23)
+
+- Dependency updates
+
+## 1.4.2 (2023-06-23)
+
+- Fix binding of Crypto to getRandomValues under node
+
+## 1.4.1 (2023-04-27)
+
+- Removed `globalThis` usage
+
 ## 1.4.0 (2023-02-22)
 
 - Changed `encrypt` function: accepts `getRandomValues` option for Node < 19.

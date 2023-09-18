@@ -1,5 +1,5 @@
 import { AUTH_BYTES, KEY_BYTES, KEY_LENGTHS, KEY_MAGIC_BYTES, KEY_MAGIC_STRINGS } from "./magic.js";
-import { Footer, Payload } from "./types.js";
+import { Assertion, Footer, Payload } from "./types.js";
 import { PasetoClaimInvalid, PasetoKeyInvalid, PasetoPayloadInvalid, PasetoPurposeInvalid, PasetoTokenInvalid } from "./errors.js";
 import { concat, stringToUint8Array, uint8ArrayToString } from "./uint8array.js";
 import { constantTimeEqual, isObject, validateFooterClaims, validateISODate, validateToken } from "./validate.js";
@@ -354,14 +354,16 @@ export function parseFooter(footer: Footer | string | Uint8Array, { maxDepth = 3
 
 /**
  * Assert that the assertion is a Uint8Array. Parses a string assertion into a Uint8Array.
- * @param {string | Uint8Array} assertion The assertion to assert.
+ * @param {Assertion | string | Uint8Array} assertion The assertion to assert.
  * @returns {Uint8Array} assertion as a Uint8Array.
  */
-export function parseAssertion(assertion: string | Uint8Array): Uint8Array {
+export function parseAssertion(assertion: Assertion | string | Uint8Array): Uint8Array {
     if(typeof assertion === "string") {
         return stringToUint8Array(assertion);
     } else if(assertion instanceof Uint8Array) {
         return assertion;
+    } else if(isObject(assertion)) {
+        return stringToUint8Array(JSON.stringify(assertion));
     }
     throw new TypeError("Assertion must be a string or Uint8Array");
 }

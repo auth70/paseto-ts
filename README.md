@@ -139,8 +139,8 @@ import { decrypt } from 'paseto-ts/v4';
 
 try {
 
-    // token = v4.local.xxx..
-    const { payload, footer } = await decrypt(
+    // generic type parameter is optional but will give you type safety on the payload
+    const { payload, footer } = await decrypt<{ foo: string }>( 
         // localKey = k4.local.xxx..
         localKey, // string | Uint8Array
         // token = v4.local.xxx..
@@ -253,7 +253,8 @@ import { verify } from 'paseto-ts/v4';
 
 try {
 
-    const { payload, footer } = await verify(
+    // generic type parameter is optional but will give you type safety on the payload
+    const { payload, footer } = await verify<{ foo: string }>(  
         // publicKey = k4.public.xxx..
         publicKey, // string | Uint8Array
         // token = v4.public.xxx..

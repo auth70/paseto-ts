@@ -1,6 +1,10 @@
 export type PasetoPurpose = 'local' | 'public';
 
-export interface Payload {
+export type Assertion = {
+    [key: string]: any;
+} | string | Uint8Array;
+
+export type Payload = {
     [key: string]: any;
     iss?: string;
     sub?: string;
@@ -11,7 +15,7 @@ export interface Payload {
     iat?: string;
 }
 
-export interface Footer {
+export type Footer = {
     [key: string]: any;
     kid?: string;
     wpk?: string;
