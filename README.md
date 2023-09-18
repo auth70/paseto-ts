@@ -108,8 +108,8 @@ try {
         {
             // Optional: If footer parses to an object, its `kid` and `wpk` claims will be validated.
             footer, // Footer | string | Uint8Array
-            // Optional: Assertion is any string or buffer.
-            assertion, // string | Uint8Array
+            // Optional: Assertion is a JSON.stringifyable object, string or buffer.
+            assertion, // Assertion | string | Uint8Array
             // Optional: If true, a default `exp` claim of 1 hour will be added to the payload.
             addExp, // boolean; defaults to true
             // Optional: If true, a default `iat` claim of the current time will be added to the payload.
@@ -146,8 +146,8 @@ try {
         // token = v4.local.xxx..
         token, // string | Uint8Array
         {
-            // Optional: Assertion is any string or buffer.
-            assertion, // string | Uint8Array
+            // Optional: Assertion is a JSON.stringifyable object, string or buffer.
+            assertion, // Assertion | string | Uint8Array
             // Optional: Maximum depth of the JSON in the payload and footer objects (if footer parses to an object)
             maxDepth, // number; defaults to 32. 0 to disable
             // Optional: Maximum number of keys in the payload and footer objects (if footer parses to an object)
@@ -224,8 +224,8 @@ try {
         {
             // Optional: If footer parses to an object, its `kid` and `wpk` claims will be validated.
             footer, // Footer | string | Uint8Array
-            // Optional: Assertion is any string or buffer.
-            assertion, // string | Uint8Array
+            // Optional: Assertion is a JSON.stringifyable object, string or buffer.
+            assertion, // Assertion | string | Uint8Array
             // Optional: If true, a default `exp` claim of 1 hour will be added to the payload.
             addExp, // boolean; defaults to true
             // Optional: If true, a default `iat` claim of the current time will be added to the payload.
@@ -260,8 +260,8 @@ try {
         // token = v4.public.xxx..
         token, // string | Uint8Array
         {
-            // Optional: Assertion is any string or buffer.
-            assertion, // string | Uint8Array
+            // Optional: Assertion is a JSON.stringifyable object, string or buffer.
+            assertion, // Assertion | string | Uint8Array
             // Optional: Maximum depth of the JSON in the payload and footer objects (if footer parses to an object)
             maxDepth, // number; defaults to 32. 0 to disable
             // Optional: Maximum number of keys in the payload and footer objects (if footer parses to an object)
