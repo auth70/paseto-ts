@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.1 (2023-09-18)
+
+- Fix typo
+
 ## 1.5.0 (2023-09-18)
 
 - Support objects in assertions
