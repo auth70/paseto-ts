@@ -209,7 +209,7 @@ const { secretKey, publicKey } = generateKeys('public', { format: 'buffer' });
 
 ### Sign a payload
 
-You can pass a `Payload` object, a `string` or an `Uint8Array` to the `sign` function PASETO defines a set of [registered claims](https://github.com/paseto-standard/paseto-spec/blob/master/docs/02-Implementation-Guide/04-Claims.md#registered-claims) that you can use in your payload. Any registered claims are validated.
+You can pass a `Payload` object, a `string` or an `Uint8Array` to the `sign` function. PASETO defines a set of [registered claims](https://github.com/paseto-standard/paseto-spec/blob/master/docs/02-Implementation-Guide/04-Claims.md#registered-claims) that you can use in your payload. Any registered claims are validated.
 
 ```ts
 import { sign } from 'paseto-ts/v4';
