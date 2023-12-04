@@ -4,13 +4,17 @@ This is a [PASETO](https://paseto.io) v4 implementation written in TypeScript. I
 
 If you are unfamiliar with PASETO, please see Okta's blog post ["A Thorough Introduction to PASETO"](https://developer.okta.com/blog/2019/10/17/a-thorough-introduction-to-paseto).
 
+The only dependencies are the Blake2b, Ed25519 and XChaCha20 cryptographic primitives, which do not yet exist in the standard Web Crypto API, provided by [stablelib](https://www.stablelib.com). If you wish to use other primitives, feel free to fork the project and implement them; it should be straightforward.
+
 ## Installation
 
 ```bash
 npm install --save paseto-ts
 ```
 
-The only dependencies are the Blake2b, Ed25519 and XChaCha20 cryptographic primitives, which do not yet exist in the standard Web Crypto API, provided by [stablelib](https://www.stablelib.com). If you wish to use other primitives, feel free to fork the project and implement them; it should be straightforward.
+**This library is an ES Module! There is no commonjs target as of now. If you require one, feel free to make a pull request.** (tsconfig module/target ES2022)
+
+**Remember:** You need to put `"type": "module"` in your package.json to enable ESM in Node! If you are getting an export error, this is probably why.
 
 ## Supported PASETO versions
 
@@ -25,7 +29,7 @@ This library implements the `k4.local`, `k4.public` and `k4.secret` [PASERK](htt
 
 ## Usage
 
-This library is an ES module (tsconfig module/target ES2022). It will not work in commonjs environments without a transpilation step. It has been tested in Node > 16 and modern browsers. As it depends on the Web Crypto API being available, Deno and Bun should work, but are not tested.
+The package will not work in commonjs environments without a transpilation step. It has been tested in Node > 16 and modern browsers. As it depends on the Web Crypto API being available, Deno and Bun should work, but are not tested.
 
 ### Note on Node versions under 19
 
