@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.5.4 (2023-12-15)
+
+- README update
+
+## 1.5.3 (2023-12-15)
+
+- Dependency updates
+
+## 1.5.2 (2023-12-04)
+
+- README update
+
 ## 1.5.1 (2023-09-18)
 
 - Fix typo
