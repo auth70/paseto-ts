@@ -7,7 +7,9 @@
 
 # paseto-ts
 
-This is a [PASETO](https://paseto.io) v4 implementation written in TypeScript. It does not require Node.js. The code is well-documented and has 100% unit test coverage ensuring it conforms with the best practices laid out in the PASETO implementation guide.
+[PASETO](https://paseto.io) v4 implementation written in TypeScript. Does not require Node.js.
+
+The code is well-documented and has 100% unit test coverage ensuring it conforms with the best practices laid out in the PASETO implementation guide.
 
 If you are unfamiliar with PASETO, please see Okta's blog post ["A Thorough Introduction to PASETO"](https://developer.okta.com/blog/2019/10/17/a-thorough-introduction-to-paseto).
 
@@ -38,8 +40,8 @@ This library implements the `k4.local`, `k4.public` and `k4.secret` [PASERK](htt
 
 The package will not work in commonjs environments without a transpilation step. It has been tested in Node > 16 and modern browsers. As it depends on the Web Crypto API being available, Deno and Bun should work, but are not tested.
 
-### Note on Node versions under 19
-
+<details>
+<summary><b>Note on Node versions under 19</b></summary>
 If you encounter the error `crypto is not defined` using the `generateKeys` and `encrypt` functions, you need to pass an implementation of the `getRandomValues` function as an option. This is because Node versions under 19 do not have a global `crypto` object.
 
 ```ts
@@ -54,14 +56,15 @@ const getRandomValues = (array: Uint8Array): Uint8Array => {
 
 generateKeys('local', { format: 'paserk', getRandomValues });
 ```
+</details>
 
-### `iat`, `exp` and `nbf` claims
+### Setting token expiry, issued at and not-before times
 
 When using the `encrypt` and `sign` functions, the `iat` *(issued at)* and `exp` *(expires at)* claims are added to your payload if they do not exist. By default, the `exp` claim will be set one hour in the future.
 
 You can disable this behaviour by passing `addIat: false` and/or `addExp: false` as options to create tokens that do not expire.
 
-You can provide an `exp` and `nbf` *(not before)* claim as a relative time, e.g. `exp: "1 hour"` or `nbf: "1 day"`. The `iat` claim only accepts string-formatted ISO dates (e.g. `iat: "2023-01-01T00:00:00Z"`).
+**You can provide an `exp` and `nbf` *(not before)* claim as a relative time**, e.g. `exp: "1 hour"` or `nbf: "1 day"`. The `iat` claim only accepts string-formatted ISO dates (e.g. `iat: "2023-01-01T00:00:00Z"`).
 
 Registered claims will be validated against the spec. To disable this behaviour, pass `validatePayload: false` as an option.
 
