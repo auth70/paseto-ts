@@ -1,3 +1,13 @@
+![Abacus crow](https://github.com/auth70/paseto-ts/assets/55932282/bfae9d6c-ff87-4561-bdd1-37cad25bd696)
+<p align="center">
+  <a href="https://www.npmjs.com/package/paseto-ts">
+    <img src="https://img.shields.io/npm/v/paseto-ts" alt="npm">
+  </a>
+  <a href="https://www.npmjs.com/package/paseto-ts">
+    <img src="https://img.shields.io/npm/types/paseto-ts" alt="npm type definitions">
+  </a>
+</p>
+
 # paseto-ts
 
 This is a [PASETO](https://paseto.io) v4 implementation written in TypeScript. It does not require Node.js. The code is well-documented and has 100% unit test coverage ensuring it conforms with the best practices laid out in the PASETO implementation guide.
