@@ -1,11 +1,7 @@
 ![Abacus crow](https://github.com/auth70/paseto-ts/assets/55932282/bfae9d6c-ff87-4561-bdd1-37cad25bd696)
 <p align="center">
-  <a href="https://www.npmjs.com/package/paseto-ts">
-    <img src="https://img.shields.io/npm/v/paseto-ts" alt="npm">
-  </a>
-  <a href="https://www.npmjs.com/package/paseto-ts">
-    <img src="https://img.shields.io/npm/types/paseto-ts" alt="npm type definitions">
-  </a>
+  <a href="https://www.npmjs.com/package/paseto-ts"><img src="https://img.shields.io/npm/v/paseto-ts" alt="npm"></a>
+  <a href="https://www.npmjs.com/package/paseto-ts"><img src="https://img.shields.io/npm/types/paseto-ts" alt="npm type definitions"></a>
 </p>
 
 # paseto-ts
