@@ -1,6 +1,6 @@
 {
   "name": "paseto-ts",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "PASETO v4 (encrypt, decrypt, sign & verify) in TypeScript",
   "type": "module",
   "keywords": [
@@ -39,7 +39,7 @@
   },
   "files": [
     "dist",
-    "LICENSE.md",
+    "LICENSE",
     "README.md"
   ],
   "dependencies": {
