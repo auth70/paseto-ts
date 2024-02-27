@@ -190,14 +190,14 @@ The PASETO spec dictates that you use Ed25519 keys, which are 64 bytes long. To 
 
 Type | Expected format | Length
 -------------|------------------------------------------------------------------|-----------------
-`PASERK`     | `k4.secret.[key data as base64url]`                              | 52 characters
+`PASERK`     | `k4.secret.[key data as base64url]`                              | 96 characters
 `Uint8Array` | `[0x6b, 0x34, 0x2e, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, ...key]` | 41 bytes
 
 ### Public key format
 
 Type         | Expected format                                                  | Length
 -------------|------------------------------------------------------------------|---------------
-`PASERK`     | `k4.public.[key data as base64url]`                              | 52 characters
+`PASERK`     | `k4.public.[key data as base64url]`                              | 53 characters
 `Uint8Array` | `[0x6b, 0x34, 0x2e, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, ...key]` | 41 bytes
 
 #### Generate a secret/public key pair
