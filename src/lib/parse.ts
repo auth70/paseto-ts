@@ -289,7 +289,7 @@ export function parsePayload(payload: string | Payload | Uint8Array, {
             throw new PasetoClaimInvalid("Payload must have a valid \"nbf\" claim (is not an date or a valid relative time string (e.g. \"1 hour\"))");
         }
         // The "nbf" claim must be greater than the "iat" claim
-        if (obj.hasOwnProperty("iat") && nbf <= Date.parse((obj as any).iat)) {
+        if (obj.hasOwnProperty("iat") && nbf < Date.parse((obj as any).iat)) {
             throw new PasetoClaimInvalid("Payload must have a valid \"nbf\" claim (is not greater than \"iat\")");
         }
         // The "nbf" claim must not be in the future
