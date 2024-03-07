@@ -260,6 +260,12 @@ test('parsePayload throws if nbf is before iat', () => {
     });
 });
 
+test('parsePayload lets a nbf with the same iat through', () => {
+    assert.ok(() => {
+        parsePayload({ iat: '2019-01-01T00:00:00Z', nbf: '2019-01-01T00:00:00Z' } as any);
+    });
+});
+
 // jti
 
 test('it throws if jti claim is not a string', () => {
