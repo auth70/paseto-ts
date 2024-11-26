@@ -2,7 +2,6 @@
   "name": "paseto-ts",
   "version": "1.5.7",
   "description": "PASETO v4 (encrypt, decrypt, sign & verify) in TypeScript",
-  "type": "module",
   "keywords": [
     "decrypt",
     "encrypt",
@@ -15,8 +14,10 @@
     "typescript"
   ],
   "scripts": {
-    "build": "rm -rf dist && tsc",
-    "watch": "tsc -w",
+    "build": "rm -rf dist && npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "watch": "tsc -w -p tsconfig.esm.json",
     "test": "tsm node_modules/uvu/bin.js tests",
     "test:coverage": "c8 --include=src npm test",
     "test:report": "c8 report --reporter=text-lcov > coverage.lcov"
@@ -49,57 +50,68 @@
   },
   "exports": {
     "./v4": {
-      "types": "./dist/v4/index.d.ts",
-      "import": "./dist/v4/index.js"
+      "types": "./dist/types/v4/index.d.ts",
+      "import": "./dist/esm/v4/index.js",
+      "require": "./dist/cjs/v4/index.js"
     },
     "./lib/base64url": {
-      "types": "./dist/lib/base64url.d.ts",
-      "import": "./dist/lib/base64url.js"
+      "types": "./dist/types/lib/base64url.d.ts",
+      "import": "./dist/esm/lib/base64url.js",
+      "require": "./dist/cjs/lib/base64url.js"
     },
     "./lib/errors": {
-      "types": "./dist/lib/errors.d.ts",
-      "import": "./dist/lib/errors.js"
+      "types": "./dist/types/lib/errors.d.ts",
+      "import": "./dist/esm/lib/errors.js",
+      "require": "./dist/cjs/lib/errors.js"
     },
     "./lib/json": {
-      "types": "./dist/lib/json.d.ts",
-      "import": "./dist/lib/json.js"
+      "types": "./dist/types/lib/json.d.ts",
+      "import": "./dist/esm/lib/json.js",
+      "require": "./dist/cjs/lib/json.js"
     },
     "./lib/magic": {
-      "types": "./dist/lib/magic.d.ts",
-      "import": "./dist/lib/magic.js"
+      "types": "./dist/types/lib/magic.d.ts",
+      "import": "./dist/esm/lib/magic.js",
+      "require": "./dist/cjs/lib/magic.js"
     },
     "./lib/pae": {
-      "types": "./dist/lib/pae.d.ts",
-      "import": "./dist/lib/pae.js"
+      "types": "./dist/types/lib/pae.d.ts",
+      "import": "./dist/esm/lib/pae.js",
+      "require": "./dist/cjs/lib/pae.js"
     },
     "./lib/parse": {
-      "types": "./dist/lib/parse.d.ts",
-      "import": "./dist/lib/parse.js"
+      "types": "./dist/types/lib/parse.d.ts",
+      "import": "./dist/esm/lib/parse.js",
+      "require": "./dist/cjs/lib/parse.js"
     },
     "./lib/time": {
-      "types": "./dist/lib/time.d.ts",
-      "import": "./dist/lib/time.js"
+      "types": "./dist/types/lib/time.d.ts",
+      "import": "./dist/esm/lib/time.js",
+      "require": "./dist/cjs/lib/time.js"
     },
     "./lib/types": {
-      "types": "./dist/lib/types.d.ts",
-      "import": "./dist/lib/types.js"
+      "types": "./dist/types/lib/types.d.ts",
+      "import": "./dist/esm/lib/types.js",
+      "require": "./dist/cjs/lib/types.js"
     },
     "./lib/uint8array": {
-      "types": "./dist/lib/uint8array.d.ts",
-      "import": "./dist/lib/uint8array.js"
+      "types": "./dist/types/lib/uint8array.d.ts",
+      "import": "./dist/esm/lib/uint8array.js",
+      "require": "./dist/cjs/lib/uint8array.js"
     },
     "./lib/validate": {
-      "types": "./dist/lib/validate.d.ts",
-      "import": "./dist/lib/validate.js"
+      "types": "./dist/types/lib/validate.d.ts",
+      "import": "./dist/esm/lib/validate.js",
+      "require": "./dist/cjs/lib/validate.js"
     }
   },
   "typesVersions": {
     "*": {
       "v4": [
-        "./dist/v4"
+        "./dist/types/v4"
       ],
       "lib/*": [
-        "./dist/lib/*"
+        "./dist/types/lib/*"
       ]
     }
   }
