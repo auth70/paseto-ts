@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.0 (2025-03-26)
+
+- Dependency updates
+- Removed `typesVersions` from `package.json`
+
 ## 1.5.4 (2023-12-15)
 
 - README update
