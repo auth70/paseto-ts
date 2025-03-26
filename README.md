@@ -1,5 +1,3 @@
-![Abacus crow](https://github.com/auth70/paseto-ts/assets/55932282/1fcc9bfd-937f-4892-8fa7-e82870d3ec56)
-
 <p align="center">
   <a href="https://github.com/auth70/paseto-ts/actions"><img src="https://img.shields.io/github/actions/workflow/status/auth70/paseto-ts/ci.yml?logo=github" alt="build"></a>
   <a href="https://www.npmjs.com/package/paseto-ts"><img src="https://img.shields.io/npm/v/paseto-ts" alt="npm"></a>
