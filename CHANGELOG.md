@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.1 (2025-03-26)
+
+- README update
+
 ## 1.6.0 (2025-03-26)
 
 - Dependency updates
