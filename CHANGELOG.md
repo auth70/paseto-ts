@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0 (2025-04-12)
+
+- Changed `tsconfig.json` to use `esnext`
+
 ## 1.6.1 (2025-03-26)
 
 - README update
