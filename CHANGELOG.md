@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.4 (2025-04-12)
+
+- Define `globalThis`
+
 ## 2.0.3 (2025-04-12)
 
 - Update `getRandomValues`
