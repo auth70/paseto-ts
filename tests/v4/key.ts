@@ -1,5 +1,5 @@
 import * as assert from 'uvu/assert';
-import * as crypto from 'crypto';
+import * as crypto from 'node:crypto';
 
 import { PasetoFormatInvalid, PasetoPurposeInvalid } from '../../src/lib/errors';
 
