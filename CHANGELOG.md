@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.3 (2025-04-12)
+
+- Update `getRandomValues`
+
 ## 2.0.2 (2025-04-12)
 
 - Update tests

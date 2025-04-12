@@ -37,7 +37,7 @@ export function generateKeys(purpose: 'local' | 'public', opts: { format?: 'pase
 
     let ret;
     const format = opts?.format ?? 'paserk';
-    const getRandomValues = opts?.getRandomValues ?? (crypto?.getRandomValues ? crypto.getRandomValues.bind(crypto) : undefined) as GetRandomValues;
+    const getRandomValues = opts?.getRandomValues ?? (typeof globalThis !== 'undefined' && globalThis.crypto?.getRandomValues ? globalThis.crypto.getRandomValues.bind(globalThis.crypto) : undefined) as GetRandomValues;
 
     if(!getRandomValues) {
         throw new Error('No compatible getRandomValues implementation detected in the global scope. Please pass a getRandomValues implementation to the options object (signature: getRandomValues<Uint8Array>(array: Uint8Array): Uint8Array)');

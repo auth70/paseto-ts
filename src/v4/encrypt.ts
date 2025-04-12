@@ -61,7 +61,7 @@ export function encrypt(
     // Assert that key is intended for use with v4.local tokens and has a length of 256 bits (32 bytes)
     key = parseKeyData('local', key);
 
-    getRandomValues = getRandomValues ?? (crypto?.getRandomValues ? crypto.getRandomValues.bind(crypto) : undefined) as GetRandomValues;
+    getRandomValues = getRandomValues ?? (typeof globalThis !== 'undefined' && globalThis.crypto?.getRandomValues ? globalThis.crypto.getRandomValues.bind(globalThis.crypto) : undefined) as GetRandomValues;
 
     if(!getRandomValues) {
         throw new Error('No compatible getRandomValues implementation detected in the global scope. Please pass a getRandomValues implementation to the options object (signature: getRandomValues<Uint8Array>(array: Uint8Array): Uint8Array)');
