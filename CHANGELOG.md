@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.5 (2025-04-12)
+
+- Add `DOM` to `lib` in `tsconfig.json`
+
 ## 2.0.4 (2025-04-12)
 
 - Define `globalThis`
