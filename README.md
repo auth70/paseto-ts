@@ -20,7 +20,7 @@ The only dependencies are the Blake2b, Ed25519 and XChaCha20 cryptographic primi
 npm install --save paseto-ts
 ```
 
-**This library is an ES Module!** (tsconfig module/target ES2022)
+**This library is an ES Module!**
 
 **Remember:** You need to put `"type": "module"` in your package.json to enable ESM in Node! If you are getting an export error, this is probably why.
 
