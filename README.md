@@ -170,7 +170,7 @@ try {
         }
     );
 
-    // payload: { sub: '1234567890', name: 'John Doe', iat: "2023-01-01T00:00:00.000Z" }
+    // payload: { sub: '1234567890', name: 'John Doe', iat: "2023-01-01T00:00:00.000Z", foo: 'bar' }
     // footer: { kid: 'xxx..', wpk: 'xxx..' }
 
 } catch(err) {
