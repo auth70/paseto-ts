@@ -1,5 +1,6 @@
 // Extended from https://github.com/panva/paseto/blob/main/lib/errors.js
 export const CODES = {
+    PasetoAPIError: 'ERR_PASETO_API_ERROR',
     PasetoNotSupported: 'ERR_PASETO_NOT_SUPPORTED',
     PasetoDecryptionFailed: 'ERR_PASETO_DECRYPTION_FAILED',
     PasetoInvalid: 'ERR_PASETO_INVALID',
@@ -23,6 +24,7 @@ export class PasetoError extends Error {
     }
 }
 
+export class PasetoAPIError extends PasetoError {};
 export class PasetoNotSupported extends PasetoError {};
 export class PasetoDecryptionFailed extends PasetoError {};
 export class PasetoInvalid extends PasetoError {};

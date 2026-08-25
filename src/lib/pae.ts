@@ -50,7 +50,7 @@ export function PAE(...pieces: Uint8Array[]): Uint8Array {
 
         // Ensure piece is a Uint8Array
         if (!(pieces[i] instanceof Uint8Array)) {
-            throw new TypeError('PAE expects Uint8Array arguments');
+            throw new TypeError(`PAE expects Uint8Array arguments`);
         }
 
         // Prepend the length of each piece to the output

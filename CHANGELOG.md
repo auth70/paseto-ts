@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.0.7 (2026-08-25)
+
+- Update error messages to use template literals to improve readability and remove \"\" quotes
+- Add PasetoAPIError to errors.ts and use it when a user-provided function is not available
+- Throw typed errors instead of generic errors when invalid input is provided
+- Dedupe duplicate condition for bailing out early when a payload is an array
+
+## 2.0.6 (2026-04-29)
+
+- Update dependencies
+
 ## 2.0.5 (2025-04-12)
 
 - Add `DOM` to `lib` in `tsconfig.json`

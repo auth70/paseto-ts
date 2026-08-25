@@ -40,7 +40,7 @@ export function getJsonDepth(data: string): number {
     
     // Step 7
     if (stripped.length > 0) {
-        throw new Error(`Invalid JSON string`);
+        throw new PasetoPayloadInvalid(`Invalid JSON string`);
     }
     
     // Step 8

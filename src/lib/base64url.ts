@@ -44,7 +44,7 @@ export function base64UrlDecode(str: string): Uint8Array {
  */
 export function base64UrlDecodeString(str: string): string {
     
-    if(typeof str !== 'string') throw new TypeError('Input must be a string.');
+    if(typeof str !== 'string') throw new TypeError(`Input must be a string.`);
 
     // Replace characters according to the base64url alphabet.
     str = str.replace(/-/g, '+').replace(/_/g, '/');
@@ -60,7 +60,7 @@ export function base64UrlDecodeString(str: string): string {
             str += '=';
             break;
         default:
-            throw new Error('Invalid base64url string.');
+            throw new TypeError(`Invalid base64url string.`);
     }
 
     // Decode using the regular base64 alphabet.

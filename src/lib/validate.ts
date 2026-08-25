@@ -49,14 +49,14 @@ export function validateFooterClaims(obj: Record<string, any>) {
     if (obj.hasOwnProperty("kid")) {
         const kid = (obj as any).kid;
         if (typeof kid !== "string") {
-            throw new PasetoClaimInvalid("Footer must have a valid \"kid\" claim (is not a string)");
+            throw new PasetoClaimInvalid(`Footer must have a valid "kid" claim (is not a string)`);
         }
     }
     // Validate the "wpk" claim
     if (obj.hasOwnProperty("wpk")) {
         const wpk = (obj as any).wpk;
         if (typeof wpk !== "string") {
-            throw new PasetoClaimInvalid("Footer must have a valid \"wpk\" claim (is not a string)");
+            throw new PasetoClaimInvalid(`Footer must have a valid "wpk" claim (is not a string)`);
         }
     }
 }

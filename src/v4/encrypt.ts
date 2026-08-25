@@ -9,6 +9,7 @@ import { base64UrlEncode } from "../lib/base64url.js";
 import { hash } from "@stablelib/blake2b";
 import { parseKeyData } from "../lib/parse.js";
 import { streamXOR } from "@stablelib/xchacha20";
+import { PasetoAPIError } from "../lib/errors.js";
 
 /**
  * Encrypts a payload using a local key and returns a PASETO v4.local token
@@ -64,7 +65,7 @@ export function encrypt(
     getRandomValues = getRandomValues ?? (typeof globalThis !== 'undefined' && globalThis.crypto?.getRandomValues ? globalThis.crypto.getRandomValues.bind(globalThis.crypto) : undefined) as GetRandomValues;
 
     if(!getRandomValues) {
-        throw new Error('No compatible getRandomValues implementation detected in the global scope. Please pass a getRandomValues implementation to the options object (signature: getRandomValues<Uint8Array>(array: Uint8Array): Uint8Array)');
+        throw new PasetoAPIError('No compatible getRandomValues implementation detected in the global scope. Please pass a getRandomValues implementation to the options object (signature: getRandomValues<Uint8Array>(array: Uint8Array): Uint8Array)');
     }
 
     const payloadUint8 = payloadToUint8Array(parsePayload(payload, {
